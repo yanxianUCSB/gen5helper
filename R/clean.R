@@ -31,7 +31,7 @@ export2dataframe <- function(filename, Ctrl = list(sample.by = 'row')) {
     line.DateTime <- which(grepl('Date\t', ds))
     start.Time <- strptime(paste(strsplit(ds[line.DateTime],'\t')[[1]][2],
                                  strsplit(ds[line.DateTime+1], '\t')[[1]][2]),
-                           format = '%m/%d/%Y %H:%M:%S %p',
+                           format = '%m/%d/%Y %I:%M:%S %p',
                            tz = '')
     line.procedure <- which(grepl('Procedure Details', ds))
     ifKinetics <- grepl('Kinetic', ds[line.procedure + 3])
