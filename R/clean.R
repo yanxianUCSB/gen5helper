@@ -25,9 +25,7 @@ export2dataframe <- function(filename, Ctrl = list(sample.by = 'row')) {
             mutate(
                 time.min = as.numeric(
                     difftime(strptime(as.character(Time), format = '%H:%M:%S'),
-                             strptime(as.character(Time[1]), format = '%H:%M:%S'), units = 'min'))
-            )
-    }
+                             strptime(as.character(Time[1]), format = '%H:%M:%S'), units = 'min')))}
     print(filename)
     ds <- readLines(filename)
     line.DateTime <- which(grepl('Date\t', ds))
@@ -59,5 +57,6 @@ export2dataframe <- function(filename, Ctrl = list(sample.by = 'row')) {
         warning('Input Format Not Defined')
         out <- NULL
     }
+    out <- out %>% filter(!is.na(realTime))
     return(out)
 }
