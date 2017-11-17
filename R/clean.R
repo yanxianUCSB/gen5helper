@@ -34,9 +34,10 @@ export2dataframe <- function(filename, Ctrl = list(sample.by = 'row')) {
                            format = '%m/%d/%Y %I:%M:%S %p',
                            tz = '')
     line.procedure <- which(grepl('Procedure Details', ds))
-    ifKinetics <- grepl('Kinetic', ds[line.procedure + 3])
+    line.reads <- line.procedure - 1 + (grep('Start Kinetic', ds[line.procedure:(line.procedure+20)]))
+    ifKinetics <- length(line.reads) == 1
     if (ifKinetics) {
-        l <- strsplit(ds[line.procedure + 3], ' ')[[1]]
+        l <- strsplit(ds[line.reads], ' ')[[1]]
         total.reads <- as.integer(l[which(l == 'Reads') - 1])
         # readingTypes <- sapply(which(grepl('Read\t', ds)), function(x){strsplit(ds[x], '\t')[[1]][2]})
         readingTypes <- sapply(which(grepl('Time\tT', ds)), function(x){print(ds[x-2]); strsplit(ds[x-2], '\t')[[1]][1]})
