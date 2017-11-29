@@ -1,4 +1,5 @@
 #' find sigmoid curve peak
+#' DEPRECATED! use Boltzmann() instead
 #'
 #' @param vec
 #' @param x
