@@ -49,7 +49,6 @@ export2dataframe <- function(filename, Ctrl = list(sample.by = 'row')) {
         })) %>%
             mutate(time.start = as.POSIXct(start.Time)) %>%
             mutate(
-                row = as.factor(row),
                 realTime = time.start + time.min * 60,
                 readingType = factor(readingType)
             ) %>%
