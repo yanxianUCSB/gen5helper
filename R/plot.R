@@ -7,9 +7,10 @@
 #' @export
 #'
 #' @examples
-plotFlsAbs <- function(ds) {
+plotFlsAbs <- function(ds, Ctrl = list(flsReadingType = unique(ds$readingType)[1],
+                                       plotN = c('all', 'major')[2])) {
     ds1 <- ds %>%
-        filter(readingType == unique(readingType)[1])
+        filter(readingType == Ctrl$flsReadingType)
     g <- ggplot() +
         geom_line(
             data    = ds1,
@@ -32,9 +33,9 @@ plotFlsAbs <- function(ds) {
             alpha   = 0.2
         )
     Ntype <- length(unique(ds$readingType))
-    if (Ntype > 1) {
+    if (Ctrl$plotN == 'all' && Ntype > 1) {
         dsN <- ds %>%
-            filter(readingType != unique(readingType)[1])
+            filter(readingType != Ctrl$flsReadingType)
         SCALE <- max(ds1$val.m) / max(dsN$val.m)
         g <- g +
             geom_line(
@@ -57,12 +58,14 @@ plotFlsAbs <- function(ds) {
                 ),
                 alpha = 0.2
             )
+        g <- g +
+            scale_y_continuous(sec.axis = sec_axis(~./SCALE, name='Turbidity'),
+                               limits = c(0, max(ds$val.m))) +
+            scale_x_continuous()
     }
     g <- g +
-        facet_grid(treatment~dose) +
-        scale_y_continuous(sec.axis = sec_axis(~./SCALE, name='Turbidity'),
-                           limits = c(0, max(ds$val.m))) +
-        scale_x_continuous() +
+        facet_grid(treatment~dose)
+    g <- g +
         labs(x = 'Time [hr]',
              y = 'ThT Fluorescence',
              col = '',
