@@ -2,14 +2,15 @@
 #'
 #' @param time_
 #' @param val_
+#' @param start  start = list(y0 = 500, A = 500, k = 1.1, t2 = 10)
 #'
 #' @return
 #' @export
 #'
 #' @examples
-Boltzmann <- function(time_, val_) {
+Boltzmann <- function(time_, val_, start = list(y0 = 500, A = 500, k = 1.1, t2 = 10)) {
     minpack.lm::nlsLM(y ~ y0 + A/(1+exp(-k*(t-t2))), data.frame(t = time_, y = val_),
-                      start = list(y0 = 500, A = 500, k = 1.1, t2 = 10))
+                      start = start)
 }
 #' Fitting ThT time series data with Boltzmann model. return fit data and model
 #'
