@@ -1,3 +1,19 @@
+#' filter fit
+#'
+#' @param df
+#' @param TOL
+#'
+#' @return
+#' @export
+#'
+#' @examples
+filter.fit <- function(df, TOL = 1) {
+    df %>%
+        filter(y0.sd < TOL * y0.m,
+               t2.sd < TOL * t2.m,
+               A.sd < TOL * A.m,
+               k.sd < TOL * k.m)
+}
 #' Title
 #'
 #' @param ds  gen5helper annotated data.frame
