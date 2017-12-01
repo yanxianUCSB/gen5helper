@@ -1,3 +1,49 @@
+#' Title
+#'
+#' @param ds  gen5helper annotated data.frame
+#' @param start  a list of initial fitting para
+#'
+#' @return  ds with extra fitting features
+#' @export
+#'
+#' @examples
+fit.boltzmann <- function(ds, start = list(A = 3000, y0 = 1000, k = 10, t2 = 1)) {
+    df <- bind_rows(lapply(unique(ds$row), function(ROW){
+        ds1 <- ds %>%
+            filter(row == ROW)
+        bind_rows(lapply(unique(ds1$well), function(WELL){
+            ds2 <- ds1 %>%
+                filter(well == WELL) %>%
+                arrange(rev(desc(realHour))) %>%
+                filter(val.m-3*val.sd < val) %>%  # 3 standard deviation filter
+                filter(val < val.m+3*val.sd) %>%
+                mutate(val = pracma::hampel(val, k = 2, t0 = 3)$y)  # Hampel filter, 3 sigma
+            mod <- Boltzmann(ds2$realHour, ds2$val, start = start)
+            ds3 <- ds2 %>% mutate(
+                y0 = coef(mod)['y0'],
+                A = coef(mod)['A'],
+                k = coef(mod)['k'],
+                t2 = coef(mod)['t2'],
+                val.predict = predict(mod, list(x = realHour)))
+        }))
+    }))
+    df <- df %>%
+        group_by(row) %>%
+        mutate(
+            y0.m = mean(y0),
+            y0.sd = sd(y0),
+            A.m = mean(A),
+            A.sd = sd(A),
+            k.m = mean(k),
+            k.sd = sd(k),
+            t2.m = mean(t2),
+            t2.sd = sd(t2),
+            val.pred.m = mean(val.predict),
+            val.pred.sd = sd(val.predict)
+        ) %>%
+        ungroup()
+}
+
 #' Boltzmann model for fitting time series data
 #'
 #' @param time_
