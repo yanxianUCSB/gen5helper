@@ -1,3 +1,33 @@
+#' UI fit ThT
+#'User interface for fitting ThT kinetic curve
+#' @return
+#' @export fitted.RDS fitted dataset
+#'
+#' @examples
+ui.fit.ThT <- function(){
+    ds <- readRDS(file = select.list(title = 'Which annotated data?',
+                                     choices = list.files())) %>%
+        filter(readingType == select.list(title = 'Which reading do you want to fit?',
+                                          choices = unique(readingType)))
+    df <- fit.boltzmann(ds, start = list(A = 3000, y0 = 1000, k = 1, t2 = 5))
+    # df <- filter.fit(df, TOL = 3)
+    saveRDS(df, 'fitted.RDS')
+    cat('fitting using Boltzmann model >>\n')
+    cat('saved as fitted.RDS \n')
+    ifelse0(select.list(title = 'do you want to plot it now?',
+                        choices = c('Yes','No')) == 'Yes',
+            ui.plot.fit(),
+            print('Thanks for using ThTFit!\n'))
+}
+#' UI plot fit
+#'User interface for ploting fitted ThT kinetic
+#' @return
+#' @export
+#'
+#' @examples
+ui.plot.fit <- function(){
+    warning('ui.plot.fit NotImplemented yet')
+}
 #' filter fit
 #'
 #' @param df
