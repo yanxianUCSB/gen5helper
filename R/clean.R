@@ -1,9 +1,33 @@
+#' UI Clean
+#'User interface for cleaning Gen5 automatic exported .TXT data
+#' @param args command arguments
+#'
+#' @return cleaned dataset
+#' @export cleaned.RDS cleaned dataset
+#'
+#' @examples
+ui.clean <- function(args = commandArgs(trailingOnly = T)){
+    if (length(args) < 1) {
+        inputs <- select.list(
+            title = 'Select Gen5 automatic exported .TXT data',
+            choices = list.files(path = getwd(), pattern = '.txt$',
+                                 all.files = F, full.names = F, include.dirs = F, ignore.case = T),
+            multiple = T)
+    } else if (args[1] == '-a') {
+        inputs <- list.files(path = getwd(), pattern = '.txt$',
+                             all.files = F, full.names = F, include.dirs = F, ignore.case = T)
+    } else {
+        inputs <- args
+    }
+    ds <- bind_rows(lapply(inputs,function(input){export2dataframe(input) %>% mutate(src = input)}))
+    saveRDS(ds, 'cleaned.RDS', ascii = T)
+}
 #' export2dataframe
 #' return cleaned data.frame from Gene5 exported tab-delim data
 #' @param filename
 #' @param Ctrl
 #'
-#' @return
+#' @return cleaned dataset
 #' @export
 #'
 #' @examples
