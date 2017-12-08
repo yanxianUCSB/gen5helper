@@ -1,15 +1,18 @@
 #' UI fit ThT
 #'User interface for fitting ThT kinetic curve
+#'
+#' @param START
+#'
 #' @return
 #' @export fitted.RDS fitted dataset
 #'
 #' @examples
-ui.fit.ThT <- function(){
+ui.fit.ThT <- function(START = list(A = 3000, y0 = 1000, k = 1, t2 = 5)){
     ds <- readRDS(file = select.list(title = 'Which annotated data?',
                                      choices = list.files())) %>%
         filter(readingType == select.list(title = 'Which reading do you want to fit?',
                                           choices = unique(readingType)))
-    df <- fit.boltzmann(ds, start = list(A = 3000, y0 = 1000, k = 1, t2 = 5))
+    df <- fit.boltzmann(ds, start = START)
     # df <- filter.fit(df, TOL = 3)
     saveRDS(df, 'fitted.RDS')
     cat('fitting using Boltzmann model >>\n')
