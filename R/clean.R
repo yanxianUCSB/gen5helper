@@ -59,24 +59,29 @@ export2dataframe <- function(filename, Ctrl = list(sample.by = 'row')) {
                            tz = '')
     line.procedure <- which(grepl('Procedure Details', ds))
     line.reads <- line.procedure - 1 + (grep('Start Kinetic', ds[line.procedure[1]:(line.procedure[1]+20)]))
-    ifKinetics <- length(line.reads) == 1
+    ifKinetics <- length(line.reads) > 0
     if (ifKinetics) {
-        l <- strsplit(ds[line.reads], ' ')[[1]]
-        total.reads <- as.integer(l[which(l == 'Reads') - 1])
+        out <- bind_rows(lapply(1:length(line.reads), function(read.i){
+            l <- strsplit(ds[line.reads[read.i]], ' ')[[1]]
+            total.reads <- as.integer(l[which(l == 'Reads') - 1])
+            cur.limt <- c(line.reads, length(ds)+1)[c(read.i, read.i+1)]
+            cur.range <- cur.limt[1]:(cur.limt[2]-1)
+            cur.ds <- ds[cur.range]
+            readingTypes <- sapply(which(grepl('Time\tT', cur.ds)),
+                                   function(x){print(cur.ds[x-2]); strsplit(cur.ds[x-2], '\t')[[1]][1]})
+            bind_rows(lapply(1:length(readingTypes), function(i){
+                start.row <- cur.limt[1] + which(grepl('Time\tT', cur.ds))[i] - 1
+                end.row   <- start.row + total.reads
+                read2ds(filename, start.row, end.row) %>%
+                    mutate(readingType = readingTypes[i])
+            })) %>%
+                mutate(time.start = as.POSIXct(start.Time)) %>%
+                mutate(
+                    realTime = time.start + time.min * 60
+                ) %>%
+                select(realTime, well, row, col, readingType, val, temp)
+        }))
         # readingTypes <- sapply(which(grepl('Read\t', ds)), function(x){strsplit(ds[x], '\t')[[1]][2]})
-        readingTypes <- sapply(which(grepl('Time\tT', ds)), function(x){print(ds[x-2]); strsplit(ds[x-2], '\t')[[1]][1]})
-        out <- bind_rows(lapply(1:length(readingTypes), function(i){
-            start.row <- which(grepl('Time\tT', ds))[i]
-            end.row   <- start.row + total.reads
-            read2ds(filename, start.row, end.row) %>%
-                mutate(readingType = readingTypes[i])
-        })) %>%
-            mutate(time.start = as.POSIXct(start.Time)) %>%
-            mutate(
-                realTime = time.start + time.min * 60,
-                readingType = factor(readingType)
-            ) %>%
-            select(realTime, well, row, col, readingType, val, temp)
     } else {
         warning('Input Format Not Defined')
         out <- NULL
