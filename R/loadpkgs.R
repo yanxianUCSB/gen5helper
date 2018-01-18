@@ -7,6 +7,7 @@
 loadpkgs <- function(){
     # set locale for string
     Sys.setlocale('LC_ALL','C')
+    library(pracma)
     library(dplyr)
     library(tidyr)
     library(ggplot2)
