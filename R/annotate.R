@@ -1,15 +1,14 @@
-#' annotate
-#' annotate cleaned data.frame
-#' @param ds
+#' annotate cleaned dataset
 #'
-#' @return
-#' @export
+#' @param .data cleaned dataset to annotate
+#'
+#' @return annotated dataset
+#' @export none
 #'
 #' @examples
-#' ds.cleaned   <- export2dataframe('data.txt')
-#' ds.annotated <- annotate(ds.cleaned)
-annotate <- function(ds) {
-    ds <- ds %>%
+#' export2dataframe('data.txt') %>% annotate()
+annotate <- function(.data) {
+    .data %>%
         arrange(desc(realTime)) %>%
         mutate(
             realMinute = as.numeric(difftime(realTime, realTime[length(realTime)], units = 'mins')),
@@ -25,4 +24,5 @@ annotate <- function(ds) {
             treatment = factor(row),
             dose = factor(row)
         )
+    return(.data)
 }

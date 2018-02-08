@@ -2,19 +2,19 @@
 % Please edit documentation in R/annotate.R
 \name{annotate}
 \alias{annotate}
-\title{annotate
-annotate cleaned data.frame}
+\title{annotate cleaned dataset}
 \usage{
-annotate(ds)
+annotate(.data)
 }
 \arguments{
-\item{ds}{}
+\item{.data}{cleaned dataset to annotate}
+}
+\value{
+annotated dataset
 }
 \description{
-annotate
-annotate cleaned data.frame
+annotate cleaned dataset
 }
 \examples{
-ds.cleaned   <- export2dataframe('data.txt')
-ds.annotated <- annotate(ds.cleaned)
+export2dataframe('data.txt') \%>\% annotate()
 }
