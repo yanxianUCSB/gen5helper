@@ -100,14 +100,14 @@ plot.fitted.dataset <- function(df, tiff = F, i=NULL) {
             col = ''
         )
     df <- df %>% group_by(well) %>% filter(realHour == realHour[1])
-    g.A <- ggplot(df %>% filter.fit(), aes(x = dose, y = A.m)) +
+    g.A <- ggplot(df, aes(x = dose, y = A.m)) +
         geom_point(size = 2) +
         geom_errorbar(aes(x = dose, ymax = A.m + A.sd, ymin = A.m - A.sd)) +
         theme.background.1() +
         theme.title.text.1() +
         labs(x = 'NaCl [mM]',
              y = 'Maximum ThT')
-    g.t2 <- ggplot(df %>% filter.fit(), aes(x = dose, y = t2.m)) +
+    g.t2 <- ggplot(df, aes(x = dose, y = t2.m)) +
         # g.t2 <- ggplot(df , aes(x = dose, y = t2.m)) +
         geom_point(size = 2) +
         geom_errorbar(aes(x = dose, ymax = t2.m + t2.sd, ymin = t2.m - t2.sd)) +
@@ -115,7 +115,7 @@ plot.fitted.dataset <- function(df, tiff = F, i=NULL) {
         theme.title.text.1() +
         labs(x = 'NaCl [mM]',
              y = 'Lag Time (t2)')
-    g.k <- ggplot(df %>% filter.fit(), aes(x = dose, y = k.m)) +
+    g.k <- ggplot(df, aes(x = dose, y = k.m)) +
         geom_point(size = 2) +
         geom_errorbar(aes(x = dose, ymax = k.m + k.sd, ymin = k.m - k.sd)) +
         theme.background.1() +
