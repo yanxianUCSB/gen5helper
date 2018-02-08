@@ -160,9 +160,19 @@ plot.annotated.dataset <- function(.data, primary='tht', secondary='abs', i=NULL
         theme.background.1() +
         theme.title.text.1()
     ggsave(filename = paste0('plot.tht.', i, '.png'), width = 8, height = 8)
-    g.turb <- ggplot(.data %>% filter(readingType == secondary)) +
-        geom_point( aes(x = dose, y = turb.m), size = 2) +
-        geom_errorbar(aes(x = dose, ymax=turb.m+turb.sd, ymin=turb.m-turb.sd)) +
+    g.turb <- ggplot(.data %>%
+                         filter(readingType == secondary) %>%
+                         group_by(well) %>%
+                         filter(realHour == realHour[1]) %>%
+                         mutate(turb = max(val)) %>%
+                         ungroup() %>%
+                         group_by(treatment, dose) %>%
+                         mutate(turb.m = mean(turb),
+                                turb.sd = sd(turb)) %>%
+                         ungroup()
+                         ) +
+        geom_point( aes(x = dose, y = val.m), size = 2) +
+        geom_errorbar(aes(x = dose, ymax=val.m+val.sd, ymin=val.m-val.sd)) +
         labs(x = 'NaCl [mM]',
              y = 'Turbidity') +
         theme.background.1() +
