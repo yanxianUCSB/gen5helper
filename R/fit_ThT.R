@@ -77,7 +77,7 @@ fit.boltzmann <- function(ds, start = list(A = 3000, y0 = 1000, k = 10, t2 = 1))
         }))
     }))
     df <- df %>%
-        group_by(row) %>%
+        group_by(treatment, dose) %>%
         mutate(
             y0.m = mean(y0),
             y0.sd = sd(y0),
