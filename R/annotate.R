@@ -23,6 +23,6 @@ annotate <- function(.data) {
         mutate(
             treatment = factor(row),
             dose = factor(row)
-        )
-    return(.data)
+        ) %>%
+        return()
 }
