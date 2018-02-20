@@ -7,6 +7,9 @@
 #' @export
 #'
 #' @examples
+#' g5h.clean('data.txt') %>%
+#'     g5h.annotate() %>%
+#'     plotFlsAbs(Ctrl = list(flsReadingType='tht', plotN='major'))
 plotFlsAbs <- function(ds, Ctrl = list(flsReadingType = unique(ds$readingType)[1],
                                        plotN = c('all', 'major')[2])) {
     ds1 <- ds %>%

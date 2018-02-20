@@ -1,8 +1,9 @@
-#' loadpkgs for gen5 data analysis
+#' Attach common packages
 #'
-#' @return
+#' @return NULL
 #'
 #' @examples
+#' loadpkgs()
 loadpkgs <- function(){
     # set locale for string
     Sys.setlocale('LC_ALL','C')

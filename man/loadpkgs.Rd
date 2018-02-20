@@ -2,13 +2,13 @@
 % Please edit documentation in R/loadpkgs.R
 \name{loadpkgs}
 \alias{loadpkgs}
-\title{loadpkgs for gen5 data analysis}
+\title{Attach common packages}
 \usage{
 loadpkgs()
 }
-\value{
-
-}
 \description{
-loadpkgs for gen5 data analysis
+Attach common packages
+}
+\examples{
+loadpkgs()
 }

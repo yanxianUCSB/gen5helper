@@ -18,3 +18,8 @@ a ggplot2 object
 Plot multiple readingType in line+ribbon,
 the linewidth of the first reading Type will be doubled
 }
+\examples{
+g5h.clean('data.txt') \%>\%
+    g5h.annotate() \%>\%
+    plotFlsAbs(Ctrl = list(flsReadingType='tht', plotN='major'))
+}
