@@ -2,8 +2,7 @@
 % Please edit documentation in R/clean.R
 \name{ui.clean}
 \alias{ui.clean}
-\title{UI Clean
-User interface for cleaning Gen5 automatic exported .TXT data}
+\title{UI for g5h.clean}
 \usage{
 ui.clean(args = commandArgs(trailingOnly = T))
 }
@@ -11,9 +10,12 @@ ui.clean(args = commandArgs(trailingOnly = T))
 \item{args}{command arguments}
 }
 \value{
-cleaned dataset
+data.frame
 }
 \description{
-UI Clean
-User interface for cleaning Gen5 automatic exported .TXT data
+ui.clean() is a command line user interface for g5h.clean. See ?g5h.clean for
+more information.
+}
+\examples{
+ui.clean()
 }

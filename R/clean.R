@@ -1,59 +1,78 @@
-#' UI Clean
-#'User interface for cleaning Gen5 automatic exported .TXT data
+#' UI for g5h.clean
+#'
+#' ui.clean() is a command line user interface for g5h.clean. See ?g5h.clean for
+#' more information.
+#'
 #' @param args command arguments
-#'
-#' @return cleaned dataset
-#' @export cleaned.RDS cleaned dataset
-#'
-#' @examples
-ui.clean <- function(args = commandArgs(trailingOnly = T)){
-    if (length(args) < 1) {
-        inputs <- select.list(
-            title = 'Select Gen5 automatic exported .TXT data',
-            choices = list.files(path = getwd(), pattern = '.txt$',
-                                 all.files = F, full.names = F, include.dirs = F, ignore.case = T),
-            multiple = T)
-    } else if (args[1] == '-a') {
-        inputs <- list.files(path = getwd(), pattern = '.txt$',
-                             all.files = F, full.names = F, include.dirs = F, ignore.case = T)
-    } else {
-        inputs <- args
-    }
-    ds <- bind_rows(lapply(inputs,function(input){clean(input) %>% mutate(src = input)}))
-    saveRDS(ds, 'cleaned.RDS', ascii = T)
-}
-
-#' export2dataframe
-#' return cleaned data.frame from Gene5 exported tab-delim data
-#' @param filename
-#' @param Ctrl
-#'
-#' @return cleaned dataset
-#' @export
-#'
-#' @examples
-#'
-export2dataframe <- function(filename, Ctrl = list(sample.by = 'row')) {
-    .Deprecated('g5h.clean')
-    g5h.clean(filename)
-}
-
-#' g5h.clean
-#'
-#' Return technically correct data.frame from Gen5 2.06 exported tab-delim data
-#'
-#' @param filename character
-#' @param Ctrl list
 #'
 #' @return data.frame
 #' @export
 #'
 #' @examples
-#' g5h.clean('data.txt')
-g5h.clean <- function(filename) {
-    read2ds <- function(f, start.row, end.row) {
+#' ui.clean()
+ui.clean <- function(args = commandArgs(trailingOnly = T)){
+    if (length(args) < 1) {
+        inputs <- select.list(
+            title = 'Select Gen5 automatic exported .TXT data',
+            choices = list.files(path = getwd(), pattern = '.txt$',
+                                 all.files = F, full.names = F,
+                                 include.dirs = F, ignore.case = T),
+            multiple = T)
+    } else if (args[1] == '-a') {
+        inputs <- list.files(path = getwd(), pattern = '.txt$',
+                             all.files = F, full.names = F,
+                             include.dirs = F, ignore.case = T)
+    } else {
+        inputs <- args
+    }
+    inputs %>%
+        bind_rows(function(input){
+            g5h.clean(input) %>%
+                mutate(src = input)
+        }) %>%
+        return()
+}
+
+#' Clean Gen5 exported data
+#'
+#' export2dataframe() returns technically correct data.frame from Gen5 2.06
+#' exported tab-delim data. The exported data can be generated using default
+#' export protocol in Gen5 2.06. See Gen5 User Guide for more information.
+#'
+#' @param filename the name of the file which the data are to be read from. If it
+#' does not contain an absolute path, the file name is relative to the current
+#' working directory, getwd().
+#' @param Ctrl list of controls. NOT IMPLEMENTED
+#'
+#' @return technically correct data.frame.
+#' @export
+#'
+#' @examples
+#' export2dataframe(filename = 'data.txt')
+export2dataframe <- function(filename, Ctrl = list(sample.by = 'row')) {
+    .Deprecated('g5h.clean')
+    g5h.clean(filename)
+}
+
+#' Clean Gen5 exported data
+#'
+#' g5h.clean() returns technically correct data.frame from Gen5 2.06 exported
+#' tab-delim data. The exported data can be generated using default export
+#' protocol in Gen5 2.06. See Gen5 User Guide for more information.
+#'
+#' @param file the name of the file which the data are to be read from. If it
+#' does not contain an absolute path, the file name is relative to the current
+#' working directory, getwd().
+#'
+#' @return technically correct data.frame.
+#' @export
+#'
+#' @examples
+#' g5h.clean(file = 'data.txt')
+g5h.clean <- function(file) {
+    read2ds <- function(file, start.row, end.row) {
         ds <- read.csv(
-            f,
+            file,
             header = T,
             nrows = end.row - start.row,
             skip = start.row - 1,
@@ -78,7 +97,7 @@ g5h.clean <- function(filename) {
                 units = 'min'
             )))
     }
-    ds.raw <- readLines(filename)
+    ds.raw <- readLines(file)
     line.date.times <- which(grepl('Date\t', ds.raw))
     line.procedures <- which(grepl('Procedure Details', ds.raw))
     line.reads <- line.procedures - 1 +
@@ -110,7 +129,7 @@ g5h.clean <- function(filename) {
             start.row <- cur.limt[1] +
                 which(grepl('Time\tT', cur.ds))[i] - 1
             end.row   <- start.row + cur.total.reads
-            read2ds(filename, start.row, end.row) %>%
+            read2ds(file, start.row, end.row) %>%
                 mutate(readingType = readingTypes[i])
             })) %>%
             mutate(time.start = as.POSIXct(time.start.str)) %>%

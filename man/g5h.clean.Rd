@@ -2,21 +2,23 @@
 % Please edit documentation in R/clean.R
 \name{g5h.clean}
 \alias{g5h.clean}
-\title{g5h.clean}
+\title{Clean Gen5 exported data}
 \usage{
-g5h.clean(filename)
+g5h.clean(file)
 }
 \arguments{
-\item{filename}{character}
-
-\item{Ctrl}{list}
+\item{file}{the name of the file which the data are to be read from. If it
+does not contain an absolute path, the file name is relative to the current
+working directory, getwd().}
 }
 \value{
-data.frame
+technically correct data.frame.
 }
 \description{
-Return technically correct data.frame from Gen5 2.06 exported tab-delim data
+g5h.clean returns technically correct data.frame from Gen5 2.06 exported
+tab-delim data. The exported data can be generated using default export
+protocol in Gen5 2.06. See Gen5 User Guide for more information.
 }
 \examples{
-g5h.clean('data.txt')
+g5h.clean(file = 'data.txt')
 }

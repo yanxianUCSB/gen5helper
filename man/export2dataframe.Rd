@@ -2,21 +2,25 @@
 % Please edit documentation in R/clean.R
 \name{export2dataframe}
 \alias{export2dataframe}
-\title{export2dataframe
-return cleaned data.frame from Gene5 exported tab-delim data}
+\title{Clean Gen5 exported data}
 \usage{
 export2dataframe(filename, Ctrl = list(sample.by = "row"))
 }
 \arguments{
-\item{Ctrl}{}
+\item{filename}{the name of the file which the data are to be read from. If it
+does not contain an absolute path, the file name is relative to the current
+working directory, getwd().}
+
+\item{Ctrl}{list of controls. NOT IMPLEMENTED}
 }
 \value{
-cleaned dataset
+technically correct data.frame.
 }
 \description{
-export2dataframe
-return cleaned data.frame from Gene5 exported tab-delim data
+export2dataframe() returns technically correct data.frame from Gen5 2.06
+exported tab-delim data. The exported data can be generated using default
+export protocol in Gen5 2.06. See Gen5 User Guide for more information.
 }
 \examples{
-
+export2dataframe(filename = 'data.txt')
 }
