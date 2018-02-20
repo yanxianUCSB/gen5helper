@@ -4,7 +4,7 @@
 \alias{g5h.clean}
 \title{g5h.clean}
 \usage{
-g5h.clean(filename, Ctrl = list(sample.by = "row"))
+g5h.clean(filename)
 }
 \arguments{
 \item{filename}{character}

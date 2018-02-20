@@ -35,7 +35,7 @@ ui.clean <- function(args = commandArgs(trailingOnly = T)){
 #'
 export2dataframe <- function(filename, Ctrl = list(sample.by = 'row')) {
     .Deprecated('g5h.clean')
-    g5h.clean(filename, Ctrl = list(sample.by = 'row'))
+    g5h.clean(filename)
 }
 
 #' g5h.clean
@@ -50,7 +50,7 @@ export2dataframe <- function(filename, Ctrl = list(sample.by = 'row')) {
 #'
 #' @examples
 #' g5h.clean('data.txt')
-g5h.clean <- function(filename, Ctrl = list(sample.by = 'row')) {
+g5h.clean <- function(filename) {
     read2ds <- function(f, start.row, end.row) {
         ds <- read.csv(
             f,
