@@ -82,7 +82,7 @@ plotFlsAbs <- function(ds, Ctrl = list(flsReadingType = unique(ds$readingType)[1
 #' @param i suflix of images output filename
 #'
 #' @return df
-#' @export images in current working directory
+#' @export
 #'
 #' @examples
 #' annotated.dataset %>% fit.Boltzmann() %>% plot.fitted.dataset()
@@ -143,7 +143,7 @@ plot.fitted.dataset <- function(df, tiff = F, i=NULL) {
 #' @param i sufix of images output filename
 #'
 #' @return .data
-#' @export images in current working directory
+#' @export
 #'
 #' @examples
 #' export2data.frame('data.txt') %>% annotate() %>% plot.annotated.dataset()

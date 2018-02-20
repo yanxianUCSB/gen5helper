@@ -4,7 +4,7 @@
 #' @param START
 #'
 #' @return
-#' @export fitted.RDS fitted dataset
+#' @export
 #'
 #' @examples
 ui.fit.ThT <- function(START = list(A = 3000, y0 = 1000, k = 1, t2 = 5)){
