@@ -4,6 +4,7 @@ Title: A Collection of Functions for Processing Gen5 2.06 Exported Data
 Version: 0.1.1
 Authors@R: person("Yanxian", "Lin", email = "yanxian@ucsb.edu", 
     role = c("aut", "cre"))
+Maintainer: Yanxian<yanxian@ucsb.edu>
 Description: A collection of functions for processing Gen5 2.06 exported data.
     Gen 5 is a popular data analysis software for BioTek plate readers. This 
     packages contains functions for data cleaning, modeling and plotting using 
