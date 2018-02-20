@@ -1,4 +1,6 @@
-#' Add time interval, mean and standard deviation
+#' Add useful variables
+#'
+#' Add time interval, mean, standard deviation and initilized treatment and dose.
 #'
 #' @param .data data.frame cleaned by g5h.clean()
 #'
@@ -14,10 +16,12 @@ annotate <- function(.data) {
     g5h.annotate(.data, by='col')
 }
 
-#' Add time interval, mean and standard deviation
+#' Add useful variables
+#'
+#' Add time interval, mean, standard deviation and initilized treatment and dose.
 #'
 #' @param .data data.frame cleaned by g5h.clean()
-#' @param by 'col' or 'row', default is 'col'
+#' @param by 'col' or 'row', default is 'col'. See ?g5h.gather_col for more info.
 #'
 #' @return data.frame
 #' @export
@@ -28,19 +32,18 @@ annotate <- function(.data) {
 #' ds %>% g5h.annotate(by='row')
 #'
 g5h.annotate <- function(.data, by='col'){
+    .data <- .data %>% g5h.set_time()
     if (by == 'col') {
-        .data %>%
-            g5h.set_time() %>%
-            g5h.gather_col() %>%
-            return()
+        .data <- .data %>% g5h.gather_col()
     } else if (by == 'row') {
-        .data %>%
-            g5h.set_time() %>%
-            g5h.gather_row() %>%
-            return()
+        .data <- .data %>% g5h.gather_row()
     } else {
-        stop('by should be either col or row')
+        stop('argument by should be either col or row')
     }
+    .data %>%
+        g5h.map_row('treatment', unique(.data$row)) %>%
+        g5h.map_row('dose', unique(.data$row)) %>%
+        return()
 }
 
 #' Add time intervals
@@ -51,7 +54,6 @@ g5h.annotate <- function(.data, by='col'){
 #' @param .data data.frame cleaned by g5h.clean()
 #'
 #' @return input data.frame appended with realMinute and realHour
-#' @export
 #'
 #' @examples
 #' g5h.clean('data.txt') %>%
@@ -80,7 +82,6 @@ g5h.set_time <- function(.data){
 #' @param .data data.frame
 #'
 #' @return data.frame appended with val.m and val.sd
-#' @export
 #'
 #' @examples
 #' # group by col
@@ -97,10 +98,6 @@ g5h.gather_col <- function(.data) {
             val.sd = sd(val)
         ) %>%
         ungroup() %>%
-        mutate(
-            treatment = factor(row),
-            dose = factor(row)
-        ) %>%
         return()
 }
 
@@ -115,7 +112,6 @@ g5h.gather_col <- function(.data) {
 #' @param .data data.frame
 #'
 #' @return data.frame appended with val.m and val.sd
-#' @export
 #'
 #' @examples
 #' # group by col
@@ -132,10 +128,6 @@ g5h.gather_row <- function(.data) {
             val.sd = sd(val)
         ) %>%
         ungroup() %>%
-        mutate(
-            treatment = factor(col),
-            dose = factor(col)
-        ) %>%
         return()
 }
 
@@ -149,7 +141,6 @@ g5h.gather_row <- function(.data) {
 #' @param factors vector with length equal to levels of row or col.
 #'
 #' @return data.frame appended with new variables
-#' @export
 #'
 #' @examples
 #' g5h.clean('data.txt') %>%
@@ -170,7 +161,6 @@ g5h.map_row <- function(.data, feature, factors){
 #' @param factors vector with length equal to levels of row or col.
 #'
 #' @return data.frame appended with new variables
-#' @export
 #'
 #' @examples
 #' g5h.clean('data.txt') %>%

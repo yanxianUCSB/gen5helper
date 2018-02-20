@@ -2,7 +2,7 @@
 % Please edit documentation in R/annotate.R
 \name{annotate}
 \alias{annotate}
-\title{Add time interval, mean and standard deviation}
+\title{Add useful variables}
 \usage{
 annotate(.data)
 }
@@ -14,7 +14,7 @@ data.frame appended with time intervals in minutes and hours, mean
 and standard deviation, grouped by col
 }
 \description{
-Add time interval, mean and standard deviation
+Add time interval, mean, standard deviation and initilized treatment and dose.
 }
 \examples{
 g5h.clean('data.txt') \%>\%

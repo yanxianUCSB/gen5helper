@@ -2,20 +2,20 @@
 % Please edit documentation in R/annotate.R
 \name{g5h.annotate}
 \alias{g5h.annotate}
-\title{Add time interval, mean and standard deviation}
+\title{Add useful variables}
 \usage{
 g5h.annotate(.data, by = "col")
 }
 \arguments{
 \item{.data}{data.frame cleaned by g5h.clean()}
 
-\item{by}{'col' or 'row', default is 'col'}
+\item{by}{'col' or 'row', default is 'col'. See ?g5h.gather_col for more info.}
 }
 \value{
 data.frame
 }
 \description{
-Add time interval, mean and standard deviation
+Add time interval, mean, standard deviation and initilized treatment and dose.
 }
 \examples{
 ds <- g5h.clean('data.txt')
