@@ -6,7 +6,6 @@
 #' @param args command arguments
 #'
 #' @return data.frame
-#' @export
 #'
 #' @examples
 #' ui.clean()
