@@ -4,7 +4,6 @@
 #' @param ds a gen5 annotated data.frame
 #'
 #' @return a ggplot2 object
-#' @export
 #'
 #' @examples
 #' g5h.clean('data.txt') %>%
@@ -85,7 +84,6 @@ plotFlsAbs <- function(ds, Ctrl = list(flsReadingType = unique(ds$readingType)[1
 #' @param i suflix of images output filename
 #'
 #' @return df
-#' @export
 #'
 #' @examples
 #' annotated.dataset %>% fit.Boltzmann() %>% plot.fitted.dataset()
@@ -146,7 +144,6 @@ plot.fitted.dataset <- function(df, tiff = F, i=NULL) {
 #' @param i sufix of images output filename
 #'
 #' @return .data
-#' @export
 #'
 #' @examples
 #' export2data.frame('data.txt') %>% annotate() %>% plot.annotated.dataset()
