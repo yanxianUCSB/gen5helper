@@ -6,6 +6,9 @@
 \usage{
 loadpkgs()
 }
+\value{
+
+}
 \description{
 loadpkgs for gen5 data analysis
 }

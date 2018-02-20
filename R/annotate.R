@@ -1,15 +1,17 @@
-#' annotate cleaned dataset
+#' Add time interval, mean and standard deviation
 #'
-#' @param .data cleaned dataset to annotate
+#' @param .data data.frame cleaned by g5h.clean()
 #'
-#' @return annotated dataset
-#' @export none
+#' @return data.frame appended with time intervals in minutes and hours, mean
+#' and standard deviation, grouped by col
+#' @export
 #'
 #' @examples
-#' export2dataframe('data.txt') %>% annotate()
+#' g5h.clean('data.txt') %>%
+#'     annotate()
 annotate <- function(.data) {
     .Deprecated('g5h.annotate')
-    g5h.annotate(.data)
+    g5h.annotate(.data, by='col')
 }
 
 #' Add time interval, mean and standard deviation
@@ -21,19 +23,23 @@ annotate <- function(.data) {
 #' @export
 #'
 #' @examples
-#' g5h.clean('data.txt') %>%
-#'     g5h.annotate(by='col')
+#' ds <- g5h.clean('data.txt')
+#' ds %>% g5h.annotate()
+#' ds %>% g5h.annotate(by='row')
+#'
 g5h.annotate <- function(.data, by='col'){
-    if(by=='col'){
+    if (by == 'col') {
         .data %>%
             g5h.set_time() %>%
             g5h.gather_col() %>%
             return()
-    }else if (by == 'row'){
+    } else if (by == 'row') {
         .data %>%
             g5h.set_time() %>%
             g5h.gather_row() %>%
             return()
+    } else {
+        stop('by should be either col or row')
     }
 }
 
@@ -131,4 +137,46 @@ g5h.gather_row <- function(.data) {
             dose = factor(col)
         ) %>%
         return()
+}
+
+#' Map row or col to new values
+#'
+#' g5h.map_row() or g5h.map_col() add new variables by mapping row or col to
+#' new values.
+#'
+#' @param .data data.frame cleaned by g5h.clean()
+#' @param feature character, name of new variable to add.
+#' @param factors vector with length equal to levels of row or col.
+#'
+#' @return data.frame appended with new variables
+#' @export
+#'
+#' @examples
+#' g5h.clean('data.txt') %>%
+#'     g5h.map_row(feature = 'dose', factors = c(1, 2, 3)) %>%
+#'     g5h.map_col(feature = 'treatment', factors = c('freeze', 'bake', 'grill'))
+g5h.map_row <- function(.data, feature, factors){
+    .data[[feature]] <- plyr::mapvalues(.data$row, unique(.data$row), factors)
+    return(.data)
+}
+
+#' Map row or col to new values
+#'
+#' g5h.map_row() or g5h.map_col() add new variables by mapping row or col to
+#' new values.
+#'
+#' @param .data data.frame cleaned by g5h.clean()
+#' @param feature character, name of new variable to add.
+#' @param factors vector with length equal to levels of row or col.
+#'
+#' @return data.frame appended with new variables
+#' @export
+#'
+#' @examples
+#' g5h.clean('data.txt') %>%
+#'     g5h.map_row(feature = 'dose', factors = c(1, 2, 3)) %>%
+#'     g5h.map_col(feature = 'treatment', factors = c('freeze', 'bake', 'grill'))
+g5h.map_col <- function(.data, feature, factors){
+    .data[[feature]] <- plyr::mapvalues(.data$col, unique(.data$col), factors)
+    return(.data)
 }
