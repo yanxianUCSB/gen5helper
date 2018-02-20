@@ -1,11 +1,20 @@
 Package: gen5helper
 Type: Package
-Title: Helper for Gen5 Export
-Version: 0.1.0
-Author: yanxianucsb
-Maintainer: ian <yanxian@ucsb.edu>
-Description: Helper for cleaning, annotating, fitting Gen5 automatic export data.
-License: What license is it under?
+Title: A Collection of Functions for Processing Gen5 2.06 Exported Data
+Version: 0.1.1
+Authors@R: person("Yanxian", "Lin", email = "yanxian@ucsb.edu", 
+    role = c("aut", "cre"))
+Description: A collection of functions for processing Gen5 2.06 exported data.
+    Gen 5 is a popular data analysis software for BioTek plate readers. This 
+    packages contains functions for data cleaning, modeling and plotting using 
+    exported data from Gen5 version 2.06. It exports technically correct data
+    defined in (Edwin de Jonge and Mark van der Loo, 2013) for customized 
+    analysis. It contains Boltzmann fitting for general kinetic analysis. It
+    also implement line plot and bar plot for generating publishable figures.
+    See https://www.github.com/yanxianUCSB/gen5helper for more information,
+    documentation and examples.
+Depends:
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
