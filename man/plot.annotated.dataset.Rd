@@ -5,7 +5,7 @@
 \title{plot annotated dataset}
 \usage{
 \method{plot}{annotated.dataset}(.data, primary = "tht", secondary = "abs",
-  i = NULL)
+  i = NULL, facet.wrap = FALSE)
 }
 \arguments{
 \item{.data}{version XXX}

@@ -147,19 +147,17 @@ plot.fitted.dataset <- function(df, tiff = F, i=NULL) {
 #'
 #' @examples
 #' export2data.frame('data.txt') %>% annotate() %>% plot.annotated.dataset()
-plot.annotated.dataset <- function(.data, primary='tht', secondary='abs', i=NULL) {
-    g <- plotFlsAbs(.data, list(flsReadingType = primary, plotN = 'all')) +
+plot.annotated.dataset <- function(.data, primary='tht', secondary='abs', i=NULL, facet.wrap = FALSE) {
+    g.raw <- plotFlsAbs(.data, list(flsReadingType = primary, plotN = 'all')) +
         facet_wrap(~dose) +
         theme(axis.text.y = element_text(angle = 45)) +
         theme.background.1() +
         theme.title.text.1()
-    ggsave(filename = paste0('plot.raw.', i, '.png'), width = 8, height = 8)
-    g <- plotFlsAbs(.data, list(flsReadingType = primary, plotN = 'major')) +
+    g.tht <- plotFlsAbs(.data, list(flsReadingType = primary, plotN = 'major')) +
         facet_wrap(~dose) +
         theme(axis.text.y = element_text(angle = 45)) +
         theme.background.1() +
         theme.title.text.1()
-    ggsave(filename = paste0('plot.tht.', i, '.png'), width = 8, height = 8)
     g.turb <- ggplot(.data %>%
                          filter(readingType == secondary) %>%
                          group_by(well) %>%
@@ -177,6 +175,8 @@ plot.annotated.dataset <- function(.data, primary='tht', secondary='abs', i=NULL
              y = 'Turbidity') +
         theme.background.1() +
         theme.title.text.1()
+    ggsave(filename = paste0('plot.tht.', i, '.png'), g.tht, width = 8, height = 8)
+    ggsave(filename = paste0('plot.raw.', i, '.png'), g.raw, width = 8, height = 8)
     ggsave(filename = paste0('plot.turb.', i, '.png'), g.turb, width = 6, height = 3)
     return(.data)
 }
