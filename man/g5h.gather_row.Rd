@@ -22,9 +22,9 @@ deviation, grouped by row.
 }
 \examples{
 # group by col
-g5h.clean('data.txt') \%>\%
+g5h.clean('data/demo.txt') \%>\%
     g5h.gather_col()
 # group by row
-g5h.clean('data.txt') \%>\%
+g5h.clean('data/demo.txt') \%>\%
     g5h.gather_row()
 }

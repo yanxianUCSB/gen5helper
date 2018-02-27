@@ -23,5 +23,7 @@
 plot annotated dataset
 }
 \examples{
-export2data.frame('data.txt') \%>\% annotate() \%>\% plot.annotated.dataset()
+export2data.frame('data/demo.txt') \%>\%
+    annotate() \%>\%
+    plot.annotated.dataset()
 }

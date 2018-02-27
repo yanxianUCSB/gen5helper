@@ -20,6 +20,8 @@ df
 plot fitted dataset
 }
 \examples{
-annotated.dataset \%>\% fit.Boltzmann() \%>\% plot.fitted.dataset()
-
+g5h.clean('data/demo.txt') \%>\%
+    g5h.annotate() \%>\%
+    fit.Boltzmann() \%>\%
+    plot.fitted.dataset()
 }

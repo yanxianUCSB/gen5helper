@@ -19,6 +19,3 @@ NotExported
 \description{
 Boltzmann model for fitting time series data
 }
-\examples{
-NotExported
-}

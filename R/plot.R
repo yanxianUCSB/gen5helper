@@ -6,7 +6,7 @@
 #' @return a ggplot2 object
 #'
 #' @examples
-#' g5h.clean('data.txt') %>%
+#' g5h.clean('demo/data.txt') %>%
 #'     g5h.annotate() %>%
 #'     plotFlsAbs(Ctrl = list(flsReadingType='tht', plotN='major'))
 plotFlsAbs <- function(ds, Ctrl = list(flsReadingType = unique(ds$readingType)[1],
@@ -86,8 +86,10 @@ plotFlsAbs <- function(ds, Ctrl = list(flsReadingType = unique(ds$readingType)[1
 #' @return df
 #'
 #' @examples
-#' annotated.dataset %>% fit.Boltzmann() %>% plot.fitted.dataset()
-#'
+#' g5h.clean('data/demo.txt') %>%
+#'     g5h.annotate() %>%
+#'     fit.Boltzmann() %>%
+#'     plot.fitted.dataset()
 plot.fitted.dataset <- function(df, tiff = F, i=NULL) {
     g.raw <- ggplot(df, aes(group = well)) +
         geom_line(aes(x = realHour, y=val.predict, col = 'fit'), alpha = 0.5, lwd = 1) +
@@ -146,7 +148,9 @@ plot.fitted.dataset <- function(df, tiff = F, i=NULL) {
 #' @return .data
 #'
 #' @examples
-#' export2data.frame('data.txt') %>% annotate() %>% plot.annotated.dataset()
+#' export2data.frame('data/demo.txt') %>%
+#'     annotate() %>%
+#'     plot.annotated.dataset()
 plot.annotated.dataset <- function(.data, primary='tht', secondary='abs', i=NULL, facet.wrap = FALSE) {
     g.raw <- plotFlsAbs(.data, list(flsReadingType = primary, plotN = 'all')) +
         facet_wrap(~dose) +

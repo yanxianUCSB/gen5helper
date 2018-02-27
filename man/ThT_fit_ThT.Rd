@@ -17,6 +17,3 @@ numeric vector of fit data
 \description{
 ThT_fit function to get only fit data.
 }
-\examples{
-NotExported
-}

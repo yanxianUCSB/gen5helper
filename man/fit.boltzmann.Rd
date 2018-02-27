@@ -20,7 +20,7 @@ unit of hours, using start as initial guesses. It appends A, y0, k, t2 and val.p
 variables.
 }
 \examples{
-g5h.clean('data.txt') \%>\%
+g5h.clean('data/demo.txt') \%>\%
     g5h.annotate() \%>\%
     fit.boltzmann(start = list(A = 3000, y0 = 1000, k = 10, t2 = 1))
 

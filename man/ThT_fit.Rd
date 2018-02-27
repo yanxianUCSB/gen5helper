@@ -17,6 +17,3 @@ list(data.frame, model)
 \description{
 Fitting ThT time series data with Boltzmann model. return fit data and model
 }
-\examples{
-NotExported
-}
