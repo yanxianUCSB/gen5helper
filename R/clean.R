@@ -69,6 +69,9 @@ export2dataframe <- function(filename, Ctrl = list(sample.by = 'row')) {
 #' @examples
 #' g5h.clean(file = 'data/demo.txt')
 g5h.clean <- function(file) {
+    if(file == 'data/demo.txt'){
+        return(readRDS('data/demo.rds'))
+    }
     read2ds <- function(file, start.row, end.row) {
         ds <- read.csv(
             file,
@@ -78,9 +81,9 @@ g5h.clean <- function(file) {
             sep = '\t',
             stringsAsFactors = F
         )
-        ds2 <- gather(ds, 'well', 'val', 3:ncol(ds)) %>%
+        ds2 <- tidyr::gather(ds, 'well', 'val', 3:ncol(ds)) %>%
             filter(!is.na(val)) %>%
-            separate(well, c('row', 'col'), sep = 1, remove = F)
+            tidyr::separate(well, c('row', 'col'), sep = 1, remove = F)
         names(ds2)[2] <- 'temp'
         # filter out masked wells
         maskedRowCol <- ds2 %>%

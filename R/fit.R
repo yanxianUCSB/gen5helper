@@ -186,7 +186,7 @@ ThT_fit <- function(time_, val_){
         list(
             df = data.frame(
                 realHour = time_,
-                val.m = predict(mod, list(x = time_))
+                val.m = stats::predict(mod, list(x = time_))
             ),
             model = mod
         )
