@@ -15,7 +15,7 @@ working directory, getwd().}
 technically correct data.frame.
 }
 \description{
-g5h.clean() returns technically correct data.frame from Gen5 2.06 exported
+g5h.clean_() returns technically correct data.frame from Gen5 2.06 exported
 tab-delim data. The exported data can be generated using default export
 protocol in Gen5 2.06. See Gen5 User Guide for more information.
 }

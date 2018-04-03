@@ -4,7 +4,7 @@
 \alias{select.reading}
 \title{filter matching reading type}
 \usage{
-select.reading(.data, rt)
+\method{select}{reading}(.data, rt)
 }
 \arguments{
 \item{.data}{data.frame cleaned by g5h.clean()}

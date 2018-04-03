@@ -4,7 +4,7 @@
 \alias{select.wells}
 \title{filter matching wells}
 \usage{
-select.wells(.data, rows, cols)
+\method{select}{wells}(.data, rows, cols)
 }
 \arguments{
 \item{.data}{data.frame cleaned by g5h.clean()}

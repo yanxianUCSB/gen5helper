@@ -70,7 +70,7 @@ ui.clean <- function(args = commandArgs(trailingOnly = T)){
 #' @examples
 #' export2dataframe(filename = 'data/demo.txt')
 export2dataframe <- function(filename, Ctrl = list(sample.by = 'row')) {
-    .Deprecated('g5h.clean')
+    .Deprecated('g5h.clean2')
     g5h.clean(filename)
 }
 
