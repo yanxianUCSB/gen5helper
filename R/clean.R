@@ -69,6 +69,41 @@ export2dataframe <- function(filename, Ctrl = list(sample.by = 'row')) {
 #' @examples
 #' g5h.clean(file = 'data.txt')
 g5h.clean <- function(file) {
+    .Deprecated('g5h.clean2')
+    g5h.clean_(file)
+}
+
+#' Clean Gen5 exported data
+#'
+#' g5h.clean2() returns technically correct data.frame from Gen5 2.06 exported
+#' tab-delim data. The exported data can be generated using default export
+#' protocol in Gen5 2.06. See Gen5 User Guide for more information.
+#'
+#' @param files a vector of names of the file which the data are to be read from.
+#' If it does not contain an absolute path, the file name is relative to the
+#' current working directory, getwd().
+#'
+#' @return technically correct data.frame.
+#' @export
+#'
+#' @examples
+#' g5h.clean2(file = 'data.txt')
+g5h.clean2 <- function(files) {
+    bind_rows(lapply(files, function(file) g5h.clean_(file)))
+}
+
+#' Clean Gen5 exported data
+#'
+#' g5h.clean() returns technically correct data.frame from Gen5 2.06 exported
+#' tab-delim data. The exported data can be generated using default export
+#' protocol in Gen5 2.06. See Gen5 User Guide for more information.
+#'
+#' @param file the name of the file which the data are to be read from. If it
+#' does not contain an absolute path, the file name is relative to the current
+#' working directory, getwd().
+#'
+#' @return technically correct data.frame.
+g5h.clean_ <- function(file) {
     read2ds <- function(file, start.row, end.row) {
         ds <- read.csv(
             file,
@@ -138,3 +173,25 @@ g5h.clean <- function(file) {
     out <- out %>% filter(!is.na(realTime))
     return(out)
 }
+
+#' filter matching wells
+#'
+#' @param .data data.frame cleaned by g5h.clean()
+#' @param rows rows to be selected
+#' @param cols columns to be selected
+#'
+#' @export
+select.wells <- function(.data, rows, cols) {
+    filter(.data, row %in% rows, col %in% cols)
+}
+
+#' filter matching reading type
+#'
+#' @param .data data.frame cleaned by g5h.clean()
+#' @param rt readingType
+#'
+#' @export
+select.reading <- function(.data, rt){
+    filter(.data, grepl(rt, readingType))
+}
+
