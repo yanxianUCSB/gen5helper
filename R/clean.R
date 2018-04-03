@@ -1,24 +1,3 @@
-#' filter matching wells
-#'
-#' @param .data data.frame cleaned by g5h.clean()
-#' @param rows rows to be selected
-#' @param cols columns to be selected
-#'
-#' @export
-select.wells <- function(.data, rows, cols) {
-    filter(.data, row %in% rows, col %in% cols)
-}
-
-#' filter matching reading type
-#'
-#' @param .data data.frame cleaned by g5h.clean()
-#' @param rt readingType
-#'
-#' @export
-select.reading <- function(.data, rt){
-    filter(.data, grepl(rt, readingType))
-}
-
 #' UI for g5h.clean
 #'
 #' ui.clean() is a command line user interface for g5h.clean. See ?g5h.clean for
