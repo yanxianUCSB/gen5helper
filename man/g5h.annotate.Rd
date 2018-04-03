@@ -18,7 +18,7 @@ data.frame
 Add time interval, mean, standard deviation and initilized treatment and dose.
 }
 \examples{
-ds <- g5h.clean('data.txt')
+ds <- g5h.clean('data/demo.txt')
 ds \%>\% g5h.annotate()
 ds \%>\% g5h.annotate(by='row')
 

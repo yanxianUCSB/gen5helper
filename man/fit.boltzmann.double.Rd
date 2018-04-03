@@ -18,6 +18,3 @@ NotImplemented
 \description{
 NotImplemented
 }
-\examples{
-NotImplemented
-}

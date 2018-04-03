@@ -9,6 +9,3 @@ ui.plot.fit()
 \description{
 User interface for ploting fitted ThT kinetic
 }
-\examples{
-NotImplemented
-}

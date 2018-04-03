@@ -29,30 +29,10 @@ ui.fit.ThT <- function(START = list(A = 3000, y0 = 1000, k = 1, t2 = 5)){
 #' User interface for ploting fitted ThT kinetic
 #'
 #' @return NULL
-#'
-#' @examples
-#' NotImplemented
 ui.plot.fit <- function(){
     warning('ui.plot.fit NotImplemented yet')
 }
-#' Clean deviated fit
-#'
-#' remove data points of which standar deviation of fitting parameter is larger
-#' than TOL
-#' @param df NotImplemented
-#' @param TOL NotImplemented
-#'
-#' @return NotImplemented
-#'
-#' @examples
-#' NotImplemented
-filter.fit <- function(df, TOL = 1) {
-    df %>%
-        filter(abs(y0.sd) < abs(TOL * y0.m),
-               abs(t2.sd) < abs(TOL * t2.m),
-               abs(A.sd) < abs(TOL * A.m),
-               abs(k.sd) < abs(TOL * k.m))
-}
+
 #' Fit readings with Boltzmann model
 #'
 #' fit.boltzmann() using Boltzmann model to fit readings and time intervals with
@@ -66,7 +46,7 @@ filter.fit <- function(df, TOL = 1) {
 #' @export
 #'
 #' @examples
-#' g5h.clean('data.txt') %>%
+#' g5h.clean('data/demo.txt') %>%
 #'     g5h.annotate() %>%
 #'     fit.boltzmann(start = list(A = 3000, y0 = 1000, k = 10, t2 = 1))
 #'
@@ -118,8 +98,6 @@ fit.boltzmann <- function(.data,
 #' @param start NotImplemented
 #'
 #' @return NotImplemented
-#'
-#' @examples NotImplemented
 fit.boltzmann.double <- function(ds, start = list(A = 3000, y0 = 1000, k = 10, t2 = 1,
                                                   A2 = 3000, k2 = 10, t22 = 1)){
     .Defunct(msg='NotImplemented')
@@ -175,8 +153,6 @@ fit.boltzmann.double <- function(ds, start = list(A = 3000, y0 = 1000, k = 10, t
 #' @param start  start = list(y0 = 500, A = 500, k = 1.1, t2 = 10)
 #'
 #' @return NotExported
-#'
-#' @examples NotExported
 Boltzmann <- function(time_, val_, start = list(y0 = 500, A = 500, k = 1.1, t2 = 10)) {
     minpack.lm::nlsLM(y ~ y0 + A/(1+exp(-k*(t-t2))), data.frame(t = time_, y = val_),
                       start = start)
@@ -188,8 +164,6 @@ Boltzmann <- function(time_, val_, start = list(y0 = 500, A = 500, k = 1.1, t2 =
 #' @param start NotExported
 #'
 #' @return NotExported
-#'
-#' @examples NotExported
 Boltzmann_double <- function(time_, val_, start = list(y0 = 500,
                                                        A = 500, k = 1.1, t2 = 10,
                                                        A2 = 500, k2 = 1.1, t22 = 10)) {
@@ -199,21 +173,20 @@ Boltzmann_double <- function(time_, val_, start = list(y0 = 500,
                       data.frame(t = time_, y = val_),
                       start = start)
 }
+
 #' Fitting ThT time series data with Boltzmann model. return fit data and model
 #'
 #' @param time_ NotExported
 #' @param val_ NotExported
 #'
 #' @return list(data.frame, model)
-#'
-#' @examples NotExported
 ThT_fit <- function(time_, val_){
     mod <- Boltzmann(time_, val_)
     return(
         list(
             df = data.frame(
                 realHour = time_,
-                val.m = predict(mod, list(x = time_))
+                val.m = stats::predict(mod, list(x = time_))
             ),
             model = mod
         )
@@ -225,8 +198,6 @@ ThT_fit <- function(time_, val_){
 #' @param val_ NotExported
 #'
 #' @return numeric vector of fit data
-#'
-#' @examples NotExported
 ThT_fit_ThT <- function(time_, val_){
     return(ThT_fit(time_, val_)$df$val.m)
 }

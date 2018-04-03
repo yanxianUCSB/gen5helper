@@ -9,7 +9,7 @@
 #' @export
 #'
 #' @examples
-#' g5h.clean('data.txt') %>%
+#' g5h.clean('data/demo.txt') %>%
 #'     annotate()
 annotate <- function(.data) {
     .Deprecated('g5h.annotate')
@@ -27,7 +27,7 @@ annotate <- function(.data) {
 #' @export
 #'
 #' @examples
-#' ds <- g5h.clean('data.txt')
+#' ds <- g5h.clean('data/demo.txt')
 #' ds %>% g5h.annotate()
 #' ds %>% g5h.annotate(by='row')
 #'
@@ -56,7 +56,7 @@ g5h.annotate <- function(.data, by='col'){
 #' @return input data.frame appended with realMinute and realHour
 #'
 #' @examples
-#' g5h.clean('data.txt') %>%
+#' g5h.clean('data/demo.txt') %>%
 #'     g5h.set_time()
 g5h.set_time <- function(.data){
     .data %>%
@@ -85,10 +85,10 @@ g5h.set_time <- function(.data){
 #'
 #' @examples
 #' # group by col
-#' g5h.clean('data.txt') %>%
+#' g5h.clean('data/demo.txt') %>%
 #'     g5h.gather_col()
 #' # group by row
-#' g5h.clean('data.txt') %>%
+#' g5h.clean('data/demo.txt') %>%
 #'     g5h.gather_row()
 g5h.gather_col <- function(.data) {
     .data %>%
@@ -115,10 +115,10 @@ g5h.gather_col <- function(.data) {
 #'
 #' @examples
 #' # group by col
-#' g5h.clean('data.txt') %>%
+#' g5h.clean('data/demo.txt') %>%
 #'     g5h.gather_col()
 #' # group by row
-#' g5h.clean('data.txt') %>%
+#' g5h.clean('data/demo.txt') %>%
 #'     g5h.gather_row()
 g5h.gather_row <- function(.data) {
     .data %>%
@@ -143,7 +143,7 @@ g5h.gather_row <- function(.data) {
 #' @return data.frame appended with new variables
 #'
 #' @examples
-#' g5h.clean('data.txt') %>%
+#' g5h.clean('data/demo.txt') %>%
 #'     g5h.map_row(feature = 'dose', factors = c(1, 2, 3)) %>%
 #'     g5h.map_col(feature = 'treatment', factors = c('freeze', 'bake', 'grill'))
 g5h.map_row <- function(.data, feature, factors){
@@ -163,7 +163,7 @@ g5h.map_row <- function(.data, feature, factors){
 #' @return data.frame appended with new variables
 #'
 #' @examples
-#' g5h.clean('data.txt') %>%
+#' g5h.clean('data/demo.txt') %>%
 #'     g5h.map_row(feature = 'dose', factors = c(1, 2, 3)) %>%
 #'     g5h.map_col(feature = 'treatment', factors = c('freeze', 'bake', 'grill'))
 g5h.map_col <- function(.data, feature, factors){
