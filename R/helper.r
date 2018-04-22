@@ -1,5 +1,18 @@
 #' this is a file for functions that are universally useful at common data manipulations
 
+#' as.is
+#'
+#' @param x object to transform
+#' @param vec object to extract class
+as.is <- function(x, vec) {
+    if(class(vec) == 'numeric') {
+        return(as.numeric(as.character(x)))
+    } else if (class(vec) == 'character') {
+        return(as.character(x))
+    } else {
+        return(x)
+    }
+}
 # annotation
 #' Smooth a vector using moving average
 #'
