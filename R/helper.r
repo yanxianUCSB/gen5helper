@@ -4,6 +4,8 @@
 #'
 #' @param x object to transform
 #' @param vec object to extract class
+#'
+#' @export
 as.is <- function(x, vec) {
     if(class(vec) == 'numeric') {
         return(as.numeric(as.character(x)))
