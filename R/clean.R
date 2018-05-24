@@ -6,9 +6,6 @@
 #' @param args command arguments
 #'
 #' @return data.frame
-#'
-#' @examples
-#' ui.clean()
 ui.clean <- function(args = commandArgs(trailingOnly = T)){
     if (length(args) < 1) {
         inputs <- select.list(
@@ -47,7 +44,7 @@ ui.clean <- function(args = commandArgs(trailingOnly = T)){
 #' @export
 #'
 #' @examples
-#' export2dataframe(filename = 'data/demo.txt')
+#' export2dataframe(filename = 'inst/extdata/demo_input.txt')
 export2dataframe <- function(filename, Ctrl = list(sample.by = 'row')) {
     .Deprecated('g5h.clean2')
     g5h.clean(filename)
@@ -67,7 +64,7 @@ export2dataframe <- function(filename, Ctrl = list(sample.by = 'row')) {
 #' @export
 #'
 #' @examples
-#' g5h.clean(file = 'data/demo.txt')
+#' g5h.clean(file = 'inst/extdata/demo_input.txt')
 g5h.clean <- function(file) {
     .Deprecated('g5h.clean2')
     g5h.clean_(file)
@@ -87,7 +84,7 @@ g5h.clean <- function(file) {
 #' @export
 #'
 #' @examples
-#' g5h.clean2(file = 'data/demo.txt')
+#' g5h.clean2(file = 'inst/extdata/demo_input.txt')
 g5h.clean2 <- function(files) {
     bind_rows(lapply(files, function(file) g5h.clean_(file)))
 }

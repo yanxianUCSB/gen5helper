@@ -70,15 +70,9 @@ ui.plot.fit <- function(){
 #' @export
 #'
 #' @examples
-#' g5h.clean('data/demo.txt') %>%
+#' g5h.clean2('inst/extdata/demo_input.txt') %>%
 #'     g5h.annotate() %>%
 #'     fit.boltzmann(start = list(A = 3000, y0 = 1000, k = 10, t2 = 1))
-#'
-# fit.boltzmann <- function(.data,
-#                           start = list(A = 3000, y0 = 1000, k = 10, t2 = 1)) {
-#     .Deprecated('g5h.fit_Boltzmann')
-#     g5h.fit_Boltzmann(.data, A=3000, y0=1000, k=10, t2=1)
-# }
 fit.boltzmann <- function(.data,
                           start = list(A = 3000, y0 = 1000, k = 10, t2 = 1)) {
     df <- bind_rows(lapply(unique(.data$row), function(ROW){
