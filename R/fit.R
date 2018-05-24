@@ -30,8 +30,6 @@ get.halftime <- function(time, val){
 #'
 #' @return NULL
 #'
-#' @examples
-#' ui.fit.ThT()
 ui.fit.ThT <- function(START = list(A = 3000, y0 = 1000, k = 1, t2 = 5)){
     ds <- readRDS(file = select.list(title = 'Which annotated data?',
                                      choices = list.files())) %>%
@@ -69,10 +67,6 @@ ui.plot.fit <- function(){
 #' @return data.frame with fitted parameters
 #' @export
 #'
-#' @examples
-#' g5h.clean2('inst/extdata/demo_input.txt') %>%
-#'     g5h.annotate() %>%
-#'     fit.boltzmann(start = list(A = 3000, y0 = 1000, k = 10, t2 = 1))
 fit.boltzmann <- function(.data,
                           start = list(A = 3000, y0 = 1000, k = 10, t2 = 1)) {
     df <- bind_rows(lapply(unique(.data$row), function(ROW){

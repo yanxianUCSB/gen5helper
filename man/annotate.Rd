@@ -16,7 +16,3 @@ and standard deviation, grouped by col
 \description{
 Add time interval, mean, standard deviation and initilized treatment and dose.
 }
-\examples{
-g5h.clean('data/demo.txt') \%>\%
-    annotate()
-}

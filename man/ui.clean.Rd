@@ -16,6 +16,3 @@ data.frame
 ui.clean() is a command line user interface for g5h.clean. See ?g5h.clean for
 more information.
 }
-\examples{
-ui.clean()
-}

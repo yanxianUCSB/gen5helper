@@ -9,6 +9,3 @@ loadpkgs()
 \description{
 Attach common packages
 }
-\examples{
-loadpkgs()
-}

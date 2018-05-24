@@ -43,8 +43,6 @@ ui.clean <- function(args = commandArgs(trailingOnly = T)){
 #' @return technically correct data.frame.
 #' @export
 #'
-#' @examples
-#' export2dataframe(filename = 'inst/extdata/demo_input.txt')
 export2dataframe <- function(filename, Ctrl = list(sample.by = 'row')) {
     .Deprecated('g5h.clean2')
     g5h.clean(filename)
@@ -63,8 +61,6 @@ export2dataframe <- function(filename, Ctrl = list(sample.by = 'row')) {
 #' @return technically correct data.frame.
 #' @export
 #'
-#' @examples
-#' g5h.clean(file = 'inst/extdata/demo_input.txt')
 g5h.clean <- function(file) {
     .Deprecated('g5h.clean2')
     g5h.clean_(file)
@@ -83,8 +79,6 @@ g5h.clean <- function(file) {
 #' @return technically correct data.frame.
 #' @export
 #'
-#' @examples
-#' g5h.clean2(file = 'inst/extdata/demo_input.txt')
 g5h.clean2 <- function(files) {
     bind_rows(lapply(files, function(file) g5h.clean_(file)))
 }

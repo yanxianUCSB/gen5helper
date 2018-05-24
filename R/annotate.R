@@ -8,9 +8,6 @@
 #' and standard deviation, grouped by col
 #' @export
 #'
-#' @examples
-#' g5h.clean2('inst/extdata/demo_input.txt') %>%
-#'     annotate()
 annotate <- function(.data) {
     .Deprecated('g5h.annotate')
     g5h.annotate(.data, by='col')
@@ -25,11 +22,6 @@ annotate <- function(.data) {
 #'
 #' @return data.frame
 #' @export
-#'
-#' @examples
-#' ds <- g5h.clean2('inst/extdata/demo_input.txt')
-#' ds %>% g5h.annotate()
-#' ds %>% g5h.annotate(by='row')
 #'
 g5h.annotate <- function(.data, by='col'){
     .data <- .data %>% g5h.set_time()
@@ -55,9 +47,6 @@ g5h.annotate <- function(.data, by='col'){
 #'
 #' @return input data.frame appended with realMinute and realHour
 #'
-#' @examples
-#' g5h.clean2('inst/extdata/demo_input.txt') %>%
-#'     g5h.set_time()
 g5h.set_time <- function(.data){
     .data %>%
         arrange(desc(realTime)) %>%
@@ -83,13 +72,6 @@ g5h.set_time <- function(.data){
 #'
 #' @return data.frame appended with val.m and val.sd
 #'
-#' @examples
-#' # group by col
-#' g5h.clean2('inst/extdata/demo_input.txt') %>%
-#'     g5h.gather_col()
-#' # group by row
-#' g5h.clean2('inst/extdata/demo_input.txt') %>%
-#'     g5h.gather_row()
 g5h.gather_col <- function(.data) {
     .data %>%
         group_by(realTime, readingType, row) %>%
@@ -113,13 +95,6 @@ g5h.gather_col <- function(.data) {
 #'
 #' @return data.frame appended with val.m and val.sd
 #'
-#' @examples
-#' # group by col
-#' g5h.clean2('inst/extdata/demo_input.txt') %>%
-#'     g5h.gather_col()
-#' # group by row
-#' g5h.clean2('inst/extdata/demo_input.txt') %>%
-#'     g5h.gather_row()
 g5h.gather_row <- function(.data) {
     .data %>%
         group_by(realTime, readingType, col) %>%
@@ -142,10 +117,6 @@ g5h.gather_row <- function(.data) {
 #'
 #' @return data.frame appended with new variables
 #'
-#' @examples
-#' g5h.clean2('inst/extdata/demo_input.txt') %>%
-#'     g5h.map_row(feature = 'dose', factors = c(1, 2, 3)) %>%
-#'     g5h.map_col(feature = 'treatment', factors = c('freeze', 'bake', 'grill'))
 g5h.map_row <- function(.data, feature, factors){
     .data[[feature]] <- plyr::mapvalues(.data$row, unique(.data$row), factors)
     return(.data)
@@ -162,10 +133,6 @@ g5h.map_row <- function(.data, feature, factors){
 #'
 #' @return data.frame appended with new variables
 #'
-#' @examples
-#' g5h.clean2('inst/extdata/demo_input.txt') %>%
-#'     g5h.map_row(feature = 'dose', factors = c(1, 2, 3)) %>%
-#'     g5h.map_col(feature = 'treatment', factors = c('freeze', 'bake', 'grill'))
 g5h.map_col <- function(.data, feature, factors){
     .data[[feature]] <- plyr::mapvalues(.data$col, unique(.data$col), factors)
     return(.data)

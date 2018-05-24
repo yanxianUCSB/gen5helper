@@ -12,6 +12,3 @@ ui.fit.ThT(START = list(A = 3000, y0 = 1000, k = 1, t2 = 5))
 \description{
 User interface for fitting ThT kinetic curve
 }
-\examples{
-ui.fit.ThT()
-}

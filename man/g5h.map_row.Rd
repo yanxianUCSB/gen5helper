@@ -20,8 +20,3 @@ data.frame appended with new variables
 g5h.map_row() or g5h.map_col() add new variables by mapping row or col to
 new values.
 }
-\examples{
-g5h.clean('data/demo.txt') \%>\%
-    g5h.map_row(feature = 'dose', factors = c(1, 2, 3)) \%>\%
-    g5h.map_col(feature = 'treatment', factors = c('freeze', 'bake', 'grill'))
-}

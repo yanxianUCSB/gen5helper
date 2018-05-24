@@ -7,7 +7,9 @@
 saveRDS_(.data, file = file, ...)
 }
 \arguments{
-\item{file}{filename}
+\item{.data}{object to be saved}
+
+\item{file}{filename to save}
 
 \item{...}{for saveRDS}
 }

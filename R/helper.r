@@ -85,8 +85,8 @@ write.csv_ <- function(x, file){
 }
 #' saveRDS and return .data
 #'
-#' @param .data
-#' @param file filename
+#' @param .data object to be saved
+#' @param file filename to save
 #' @param ... for saveRDS
 #'
 #' @return .data

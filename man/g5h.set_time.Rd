@@ -16,7 +16,3 @@ input data.frame appended with realMinute and realHour
 g5h.set_time() preserves existing variables and add new, realMinute and
 realHour, which are time intervals in minutes and hours.
 }
-\examples{
-g5h.clean('data/demo.txt') \%>\%
-    g5h.set_time()
-}
