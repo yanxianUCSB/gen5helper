@@ -2,10 +2,8 @@
 
 export(annotate)
 export(as.is)
-export(export2dataframe)
 export(fit.boltzmann)
 export(g5h.annotate)
-export(g5h.clean)
 export(g5h.clean2)
 export(get.halftime)
 export(loadpkgs)

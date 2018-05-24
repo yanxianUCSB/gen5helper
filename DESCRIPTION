@@ -1,7 +1,7 @@
 Package: gen5helper
 Type: Package
 Title: A Collection of Functions for Processing Gen5 2.06 Exported Data
-Version: 0.2.1
+Version: 1.0.0
 Author: Yanxian Lin
 Authors@R: person("Yanxian", "Lin", email = "yanxian@ucsb.edu", 
     role = c("aut", "cre"))

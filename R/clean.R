@@ -41,7 +41,6 @@ ui.clean <- function(args = commandArgs(trailingOnly = T)){
 #' @param Ctrl list of controls. NOT IMPLEMENTED
 #'
 #' @return technically correct data.frame.
-#' @export
 #'
 export2dataframe <- function(filename, Ctrl = list(sample.by = 'row')) {
     .Deprecated('g5h.clean2')
@@ -59,7 +58,6 @@ export2dataframe <- function(filename, Ctrl = list(sample.by = 'row')) {
 #' working directory, getwd().
 #'
 #' @return technically correct data.frame.
-#' @export
 #'
 g5h.clean <- function(file) {
     .Deprecated('g5h.clean2')
