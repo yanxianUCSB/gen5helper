@@ -95,3 +95,24 @@ saveRDS_ <- function(.data, file = file, ...){
     saveRDS(object = .data, file = file, ...)
     return(.data)
 }
+#' Most frequent numbers
+#'get the n most frequent elements in an array
+#' @param x an array of elements
+#' @param n integer, default is 1
+#'
+#' @return the most n elements
+#' @export
+#'
+#' @examples
+#' most.freq(c('a', 'a', 'b', 'b', 'b', 'c'), n = 2)
+#' most.freq(c(1, 1, 2, 3, 3, 3, 4, 4), n = 2)
+most.freq <- function(x, n = 1){
+    if(length(x) == 1) return(x)
+    type <- typeof(x)
+    sort.freq <- sort(table(x),decreasing=TRUE)
+    this.freq <- sort.freq[n]
+    this.index <- which(sort.freq < this.freq) - 1
+    results <- names(sort.freq[1:this.index])
+    class(results) <- typeof(x)
+    return(results)
+}
