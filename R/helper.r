@@ -112,6 +112,8 @@ most.freq <- function(x, n = 1){
     sort.freq <- sort(table(x),decreasing=TRUE)
     this.freq <- sort.freq[n]
     this.index <- which(sort.freq < this.freq) - 1
+    if(length(this.index) == 0)
+        this.index <- length(sort.freq)
     results <- names(sort.freq[1:this.index])
     class(results) <- typeof(x)
     return(results)
