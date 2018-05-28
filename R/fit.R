@@ -61,48 +61,28 @@ ui.plot.fit <- function(){
 #' unit of hours, using start as initial guesses. It appends A, y0, k, t2 and val.predict, while preserving existing
 #' variables.
 #'
-#' @param start a list of initial guesses of fitting parameter
-#' @param .data data.frame output by g5h.clean()
+#' @param .data data.frame with x as time, y as value
+#' @param A0 initial guess of amplititue, default 1
+#' @param k0 initial guess, default 1
+#' @param t20 initial guess, default 1
 #'
-#' @return data.frame with fitted parameters
+#' @return data.frame with fitted parameter and predicted value
 #' @export
 #'
-fit.boltzmann <- function(.data,
-                          start = list(A = 3000, y0 = 1000, k = 10, t2 = 1)) {
-    df <- bind_rows(lapply(unique(.data$row), function(ROW){
-        ds1 <- .data %>%
-            filter(row == ROW)
-        bind_rows(lapply(unique(ds1$well), function(WELL){
-            ds2 <- ds1 %>%
-                filter(well == WELL) %>%
-                arrange(rev(desc(realHour))) %>%
-                filter(val.m-3*val.sd < val) %>%  # 3 standard deviation filter
-                filter(val < val.m+3*val.sd) %>%
-                mutate(val = pracma::hampel(val, k = 2, t0 = 3)$y)  # Hampel filter, 3 sigma
-            mod <- Boltzmann(ds2$realHour, ds2$val, start = start)
-            ds3 <- ds2 %>% mutate(
-                y0 = coef(mod)['y0'],
+fit.boltzmann <- function(.data, A0 = 1, k0 = 1, t20 = 1) {
+        tryCatch({
+            mod <- Boltzmann(.data$x, .data$y, A0=A0, k0=k0, t20=t20)
+            ds3 <- .data %>% mutate(
                 A = coef(mod)['A'],
                 k = coef(mod)['k'],
                 t2 = coef(mod)['t2'],
-                val.predict = predict(mod, list(x = realHour)))
-        }))
-    }))
-    df <- df %>%
-        group_by(treatment, dose) %>%
-        mutate(
-            y0.m = mean(y0),
-            y0.sd = sd(y0),
-            A.m = mean(A),
-            A.sd = sd(A),
-            k.m = mean(k),
-            k.sd = sd(k),
-            t2.m = mean(t2),
-            t2.sd = sd(t2),
-            val.pred.m = mean(val.predict),
-            val.pred.sd = sd(val.predict)
-        ) %>%
-        ungroup()
+                r2 = summary(mod)$r.squared,
+                predict = predict(mod, list(x = x)))
+        }, warning=function(w){
+        }, error=function(e){
+            ds3 = NULL
+        }, finally = {})
+    return(ds3)
 }
 #' NotImplemented
 #'
@@ -157,17 +137,20 @@ fit.boltzmann.double <- function(ds, start = list(A = 3000, y0 = 1000, k = 10, t
         ) %>%
         ungroup()
 }
-
 #' Boltzmann model for fitting time series data
 #'
-#' @param time_ NotExported
-#' @param val_ NotExported
-#' @param start  start = list(y0 = 500, A = 500, k = 1.1, t2 = 10)
+#' @param time_ time series
+#' @param val_ normalized value
+#' @param A0 amplititude
+#' @param k0 rate constant
+#' @param t20 halt time
 #'
-#' @return NotExported
-Boltzmann <- function(time_, val_, start = list(y0 = 500, A = 500, k = 1.1, t2 = 10)) {
-    minpack.lm::nlsLM(y ~ y0 + A/(1+exp(-k*(t-t2))), data.frame(t = time_, y = val_),
-                      start = start)
+#' @return a model
+#' @export
+Boltzmann <- function(time_, val_, A0 = 1, k0 = 1, t20 = 1) {
+    minpack.lm::nlsLM(y ~ A/(1+exp(-k*(t-t2))),
+                      data.frame(t = time_, y = val_),
+                      start = list( A = A0, k = k0, t2 = t20))
 }
 #' Boltzmann model for fitting time series data
 #'
@@ -184,32 +167,4 @@ Boltzmann_double <- function(time_, val_, start = list(y0 = 500,
                           A2/(1+exp(-k2*(t-t22))),
                       data.frame(t = time_, y = val_),
                       start = start)
-}
-
-#' Fitting ThT time series data with Boltzmann model. return fit data and model
-#'
-#' @param time_ NotExported
-#' @param val_ NotExported
-#'
-#' @return list(data.frame, model)
-ThT_fit <- function(time_, val_){
-    mod <- Boltzmann(time_, val_)
-    return(
-        list(
-            df = data.frame(
-                realHour = time_,
-                val.m = stats::predict(mod, list(x = time_))
-            ),
-            model = mod
-        )
-    )
-}
-#' ThT_fit function to get only fit data.
-#'
-#' @param time_ NotExported
-#' @param val_ NotExported
-#'
-#' @return numeric vector of fit data
-ThT_fit_ThT <- function(time_, val_){
-    return(ThT_fit(time_, val_)$df$val.m)
 }
