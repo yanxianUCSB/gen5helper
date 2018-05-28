@@ -13,7 +13,7 @@ Description: A collection of functions for processing Gen5 2.06 exported data.
     defined in (Edwin de Jonge and Mark van der Loo, 2013) for customized 
     analysis. It contains Boltzmann fitting for general kinetic analysis. It
     also implement line plot and bar plot for generating publishable figures.
-    See https://www.github.com/yanxianUCSB/gen5helper for more information,
+    See <https://www.github.com/yanxianUCSB/gen5helper> for more information,
     documentation and examples.
 Depends: dplyr, utils
 License: MIT + file LICENSE
