@@ -137,3 +137,31 @@ g5h.map_col <- function(.data, feature, factors){
     .data[[feature]] <- plyr::mapvalues(.data$col, unique(.data$col), factors)
     return(.data)
 }
+#' Map group into new variable
+#'
+#' @param .data data.frame with group info
+#' @param newvar name of new variable to add.
+#' @param facs vector with length equal to levels of group
+#'
+#' @return data.frame with added new variable
+#' @export
+#'
+#' @examples
+# x <- data.frame(counts = c(1, 2, 3), group = c('lemon', 'lemon', 'honey'))
+# map.group(x, taste, c('sour', 'sweet'))
+map.group <- function(.data, newvar, facs){
+    if(is.numeric(facs)) {
+        mutate(.data,
+               !! quo_name(enquo(newvar)) :=
+                   plyr::mapvalues(group, unique(group), facs) %>%
+                   naturalsort::naturalfactor() %>%
+                   as.is(facs)
+        )
+    } else {
+        mutate(.data,
+               !! quo_name(enquo(newvar)) :=
+                   plyr::mapvalues(group, unique(group), facs) %>%
+                   naturalsort::naturalfactor()
+        )
+    }
+}
