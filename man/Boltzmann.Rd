@@ -4,17 +4,21 @@
 \alias{Boltzmann}
 \title{Boltzmann model for fitting time series data}
 \usage{
-Boltzmann(time_, val_, start = list(y0 = 500, A = 500, k = 1.1, t2 = 10))
+Boltzmann(time_, val_, A0 = 1, k0 = 1, t20 = 1)
 }
 \arguments{
-\item{time_}{NotExported}
+\item{time_}{time series}
 
-\item{val_}{NotExported}
+\item{val_}{normalized value}
 
-\item{start}{start = list(y0 = 500, A = 500, k = 1.1, t2 = 10)}
+\item{A0}{amplititude}
+
+\item{k0}{rate constant}
+
+\item{t20}{halt time}
 }
 \value{
-NotExported
+a model
 }
 \description{
 Boltzmann model for fitting time series data

@@ -4,15 +4,19 @@
 \alias{fit.boltzmann}
 \title{Fit readings with Boltzmann model}
 \usage{
-fit.boltzmann(.data, start = list(A = 3000, y0 = 1000, k = 10, t2 = 1))
+fit.boltzmann(.data, A0 = 1, k0 = 1, t20 = 1)
 }
 \arguments{
-\item{.data}{data.frame output by g5h.clean()}
+\item{.data}{data.frame with x as time, y as value}
 
-\item{start}{a list of initial guesses of fitting parameter}
+\item{A0}{initial guess of amplititue, default 1}
+
+\item{k0}{initial guess, default 1}
+
+\item{t20}{initial guess, default 1}
 }
 \value{
-data.frame with fitted parameters
+data.frame with fitted parameter and predicted value
 }
 \description{
 fit.boltzmann() using Boltzmann model to fit readings and time intervals with
