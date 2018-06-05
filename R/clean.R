@@ -96,15 +96,14 @@ g5h.clean_ <- function(file) {
     if(file == 'data/demo.txt'){
         return(readRDS('data/demo.rds'))
     }
+    strsplit_ <- function(strVec, split, n = 1){
+        sapply(strVec, function(x){
+            strsplit(x, split)[[1]][n]
+        }, simplify = T)
+    }
     read2ds <- function(file, start.row, end.row) {
-        ds <- read.csv(
-            file,
-            header = T,
-            nrows = end.row - start.row,
-            skip = start.row - 1,
-            sep = '\t',
-            stringsAsFactors = F
-        )
+        ds <- read.csv(file, header = T, nrows = end.row - start.row,
+                       skip = start.row - 1, sep = '\t', stringsAsFactors = F)
         ds2 <- tidyr::gather(ds, 'well', 'val', 3:ncol(ds)) %>%
             filter(!is.na(val)) %>%
             tidyr::separate(well, c('row', 'col'), sep = 1, remove = F)
@@ -117,12 +116,13 @@ g5h.clean_ <- function(file) {
             filter(!((row %in% unique(maskedRowCol$row)) &
                          (col %in% unique(maskedRowCol$col)))) %>%
             mutate(val = as.numeric(val)) %>%
-            mutate(time.min = as.numeric(difftime(
-                strptime(as.character(Time), format = '%H:%M:%S'),
-                strptime(as.character(Time[1]), format = '%H:%M:%S'),
-                units = 'min'
-            )))
-    }
+            mutate(time_hour = as.numeric(strsplit_(Time, ':', 1))) %>%
+            mutate(time_min = as.numeric(strsplit_(Time, ':', 2))) %>%
+            mutate(time_sec = as.numeric(strsplit_(Time, ':', 3))) %>%
+            mutate(total_min = time_hour * 60 + time_min + time_sec/60) %>%
+            mutate(time.min = total_min - total_min[1]) %>%
+            select(-time_hour, -time_min, -time_sec, -total_min)
+        }
     ds.raw <- readLines(file)
     line.date.times <- which(grepl('Date\t', ds.raw))
     line.procedures <- which(grepl('Procedure Details', ds.raw))
@@ -162,6 +162,6 @@ g5h.clean_ <- function(file) {
             mutate(realTime = time.start + time.min * 60) %>%
             select(realTime, well, row, col, readingType, val, temp)
     }))
-    out <- out %>% filter(!is.na(realTime))
+    out <- out %>% filter(!is.na(realTime), !is.na(val))
     return(out)
 }
