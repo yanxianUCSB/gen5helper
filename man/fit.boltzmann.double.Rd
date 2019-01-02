@@ -4,8 +4,8 @@
 \alias{fit.boltzmann.double}
 \title{NotImplemented}
 \usage{
-fit.boltzmann.double(ds, start = list(A = 3000, y0 = 1000, k = 10, t2 = 1, A2
-  = 3000, k2 = 10, t22 = 1))
+fit.boltzmann.double(ds, start = list(A = 3000, y0 = 1000, k = 10, t2 =
+  1, A2 = 3000, k2 = 10, t22 = 1))
 }
 \arguments{
 \item{ds}{NotImplemented}

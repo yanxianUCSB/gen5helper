@@ -4,8 +4,8 @@
 \alias{Boltzmann_double}
 \title{Boltzmann model for fitting time series data}
 \usage{
-Boltzmann_double(time_, val_, start = list(y0 = 500, A = 500, k = 1.1, t2 =
-  10, A2 = 500, k2 = 1.1, t22 = 10))
+Boltzmann_double(time_, val_, start = list(y0 = 500, A = 500, k = 1.1, t2
+  = 10, A2 = 500, k2 = 1.1, t22 = 10))
 }
 \arguments{
 \item{time_}{NotExported}

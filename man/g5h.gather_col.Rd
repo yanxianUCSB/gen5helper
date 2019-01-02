@@ -15,8 +15,6 @@ data.frame appended with val.m and val.sd
 \description{
 g5h.gather_col() preserve existing variables and add mean and standard
 deviation, grouped by col.
-}
-\details{
 g5h.gather_row() preserve existing variables and add mean and standard
 deviation, grouped by row.
 }

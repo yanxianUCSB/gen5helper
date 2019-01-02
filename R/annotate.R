@@ -6,10 +6,9 @@
 #'
 #' @return data.frame appended with time intervals in minutes and hours, mean
 #' and standard deviation, grouped by col
-#' @export
 #'
 annotate <- function(.data) {
-    .Deprecated('g5h.annotate')
+    .Deprecated('g5h.annotate2')
     g5h.annotate(.data, by='col')
 }
 
@@ -24,6 +23,7 @@ annotate <- function(.data) {
 #' @export
 #'
 g5h.annotate <- function(.data, by='col'){
+    .Deprecated('g5h.annotate2')
     .data <- .data %>% g5h.set_time()
     if (by == 'col') {
         .data <- .data %>% g5h.gather_col()
@@ -38,6 +38,20 @@ g5h.annotate <- function(.data, by='col'){
         return()
 }
 
+#' Add useful variables
+#' Add time interval, mean, standard deviation and initilized treatment and dose.
+#'
+#' @param .data data.frame cleaned by g5h.clean()
+#' @param by 'col' or 'row', default is 'col'. See ?g5h.gather_col for more info.
+#'
+#' @return data.frame
+#' @export
+#'
+g5h.annotate2 <- function(.data, by='col'){
+    .data %>%
+        g5h.set_time2('hours')
+}
+
 #' Add time intervals
 #'
 #' g5h.set_time() preserves existing variables and add new, realMinute and
@@ -48,31 +62,57 @@ g5h.annotate <- function(.data, by='col'){
 #' @return input data.frame appended with realMinute and realHour
 #'
 g5h.set_time <- function(.data){
+    .Deprecated('g5h.set_time2')
+    .data %>%
+        g5h.set_time2('hours') %>%
+        rename(realHour = time) %>%
+        mutate(realMinute = realHour * 60)
+}
+
+#' Add time intervals
+#'
+#' g5h.set_time() preserves existing variables and add new variable,
+#' time, which are time intervals in hours.
+#'
+#' @param .data data.frame cleaned by g5h.clean()
+#' @param units hours or minutes
+#'
+#' @return input data.frame appended with time
+#'
+g5h.set_time2 <- function(.data, units='hours') {
     .data %>%
         arrange(desc(realTime)) %>%
-        mutate(
-            realMinute = as.numeric(difftime(realTime,
-                                             realTime[length(realTime)],
-                                             units = 'mins')),
-            realHour   = as.numeric(difftime(realTime,
-                                             realTime[length(realTime)],
-                                             units = 'hours'))
-        )
+        mutate(time = as.numeric(difftime(realTime,
+                                          realTime[length(realTime)],
+                                          units = units)))
 }
 
 #' Add mean and standard deviation
 #'
 #' g5h.gather_col() preserve existing variables and add mean and standard
 #' deviation, grouped by col.
-#'
 #' g5h.gather_row() preserve existing variables and add mean and standard
 #' deviation, grouped by row.
 #'
 #' @param .data data.frame
 #'
 #' @return data.frame appended with val.m and val.sd
-#'
 g5h.gather_col <- function(.data) {
+    .Deprecated('gather_col')
+    .data %>% gather_col()
+}
+#' Add mean and standard deviation
+#'
+#' gather_col() preserve existing variables and add mean and standard
+#' deviation, grouped by col.
+#' gather_row() preserve existing variables and add mean and standard
+#' deviation, grouped by row.
+#'
+#' @param .data data.frame
+#'
+#' @return data.frame appended with val.m and val.sd
+#' @export
+gather_col <- function(.data) {
     .data %>%
         group_by(realTime, readingType, row) %>%
         mutate(
@@ -87,15 +127,28 @@ g5h.gather_col <- function(.data) {
 #'
 #' g5h.gather_col() preserve existing variables and add mean and standard
 #' deviation, grouped by col.
-#'
 #' g5h.gather_row() preserve existing variables and add mean and standard
 #' deviation, grouped by row.
 #'
 #' @param .data data.frame
 #'
 #' @return data.frame appended with val.m and val.sd
-#'
 g5h.gather_row <- function(.data) {
+    .Deprecated('gather_row')
+    .data %>% gather_row()
+}
+#' Add mean and standard deviation
+#'
+#' gather_col() preserve existing variables and add mean and standard
+#' deviation, grouped by col.
+#' gather_row() preserve existing variables and add mean and standard
+#' deviation, grouped by row.
+#'
+#' @param .data data.frame
+#'
+#' @return data.frame appended with val.m and val.sd
+#' @export
+gather_row <- function(.data) {
     .data %>%
         group_by(realTime, readingType, col) %>%
         mutate(
