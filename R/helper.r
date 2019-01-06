@@ -1,5 +1,37 @@
 #' this is a file for functions that are universally useful at common data manipulations
+# functions ------------------------------
 
+#' seq.LETTERS
+#' generate a sequence of LETTERS from FROM to TO
+#' @param from LETTER
+#' @param to LETTER
+#' @export
+seq.LETTERS <- function(from, to){
+    LETTERS[which(LETTERS == from):which(LETTERS == to)]
+}
+#' factor2num
+#'Convert factor to numeric
+#' @param x factor
+#' @export
+factor2num <- function(x){as.numeric(as.character(x))}
+#' mapvalues_
+#'
+#' @param x factor or character
+#' @param facs character. It maps unique(x) to facs
+#' @param bNaturalSort binary
+#' @return factor
+#' @importFrom plyr mapvalues
+#' @importFrom naturalsort naturalfactor
+#' @export
+#'
+mapvalues_ <- function(x, facs, bNaturalSort = F) {
+    #NULLing
+    if (bNaturalSort) {
+        naturalsort::naturalfactor(plyr::mapvalues(x, unique(x), facs))
+    }else{
+        factor(plyr::mapvalues(x, unique(x), facs), levels = unique(facs))
+    }
+}
 #' as.is
 #'
 #' @param x object to transform

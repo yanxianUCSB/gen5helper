@@ -214,9 +214,6 @@ g5h.map_col <- function(.data, feature, factors){
 #' @importFrom naturalsort naturalfactor
 #' @importFrom rlang :=
 #'
-#' @examples
-# x <- data.frame(counts = c(1, 2, 3), group = c('lemon', 'lemon', 'honey'))
-# map.group(x, taste, c('sour', 'sweet'))
 map.group <- function(.data, newvar, facs){
     #NULLing
     group <- NULL

@@ -2,8 +2,7 @@
 % Please edit documentation in R/helper.r
 \name{as.is}
 \alias{as.is}
-\title{this is a file for functions that are universally useful at common data manipulations
-as.is}
+\title{as.is}
 \usage{
 as.is(x, vec)
 }
@@ -13,6 +12,5 @@ as.is(x, vec)
 \item{vec}{object to extract class}
 }
 \description{
-this is a file for functions that are universally useful at common data manipulations
 as.is
 }
