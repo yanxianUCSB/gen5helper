@@ -1,14 +1,6 @@
 #' this is a file for functions that are universally useful at common data manipulations
 # functions ------------------------------
 
-#' seq.LETTERS
-#' generate a sequence of LETTERS from FROM to TO
-#' @param from LETTER
-#' @param to LETTER
-#' @export
-seq.LETTERS <- function(from, to){
-    LETTERS[which(LETTERS == from):which(LETTERS == to)]
-}
 #' factor2num
 #'Convert factor to numeric
 #' @param x factor
