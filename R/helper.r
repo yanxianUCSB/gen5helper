@@ -68,6 +68,7 @@ normalize <- function(x){
 #' @param .data grouped data.frame
 #'
 #' @return data.frame()
+#' @importFrom dplyr ungroup
 #' @export
 ungroup_ <- function(.data){
     .data %>% ungroup() %>% as.data.frame()
@@ -78,6 +79,7 @@ ungroup_ <- function(.data){
 #' @param file filename for write.csv
 #'
 #' @return x
+#' @importFrom utils write.csv
 #' @export
 write.csv_ <- function(x, file){
     write.csv(x, file, row.names = F)

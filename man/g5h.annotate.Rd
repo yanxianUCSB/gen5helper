@@ -2,7 +2,8 @@
 % Please edit documentation in R/annotate.R
 \name{g5h.annotate}
 \alias{g5h.annotate}
-\title{Add useful variables}
+\title{g5h.annotate
+Add time interval}
 \usage{
 g5h.annotate(.data, by = "col")
 }
@@ -15,5 +16,6 @@ g5h.annotate(.data, by = "col")
 data.frame
 }
 \description{
-Add time interval, mean, standard deviation and initilized treatment and dose.
+g5h.annotate
+Add time interval
 }
