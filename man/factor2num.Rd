@@ -16,3 +16,6 @@ this is a file for functions that are universally useful at common data manipula
 factor2num
 Convert factor to numeric
 }
+\examples{
+factor2num(factor(c('1', '10', '100')))
+}

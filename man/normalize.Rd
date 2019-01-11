@@ -15,3 +15,6 @@ a normalized vector
 \description{
 NA removed
 }
+\examples{
+normalize(0:10)
+}

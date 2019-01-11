@@ -15,3 +15,6 @@ numeric value
 \description{
 This computes the range of a vector as a value; NA removed.
 }
+\examples{
+range_(c(1, 5, 10))
+}

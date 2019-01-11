@@ -5,6 +5,7 @@
 #'Convert factor to numeric
 #' @param x factor
 #' @export
+#' @examples factor2num(factor(c('1', '10', '100')))
 factor2num <- function(x){as.numeric(as.character(x))}
 #' mapvalues_
 #'
@@ -15,7 +16,6 @@ factor2num <- function(x){as.numeric(as.character(x))}
 #' @importFrom plyr mapvalues
 #' @importFrom naturalsort naturalfactor
 #' @export
-#'
 mapvalues_ <- function(x, facs, bNaturalSort = F) {
     #NULLing
     if (bNaturalSort) {
@@ -74,6 +74,8 @@ smooth.mean <- function(vec, naverage){
 #'
 #' @return numeric value
 #' @export
+#' @examples
+#' range_(c(1, 5, 10))
 range_ <- function(x){
     max(x, na.rm = T)-min(x, na.rm = T)
 }
@@ -84,6 +86,8 @@ range_ <- function(x){
 #'
 #' @return a normalized vector
 #' @export
+#' @examples
+#' normalize(0:10)
 normalize <- function(x){
     (x-min(x, na.rm = T))/range_(x)
 }
