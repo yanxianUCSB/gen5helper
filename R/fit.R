@@ -22,38 +22,6 @@ get.halftime <- function(time, val){
     return( (0.5 - lm.D9$coefficients[1]) / lm.D9$coefficients[2])
 }  # time and normalized var 0.3-0.7
 
-#' UI fit ThT
-#'
-#' User interface for fitting ThT kinetic curve
-#'
-#' @param START initial guess for fit.Boltzmann
-#'
-#' @return NULL
-#'
-ui.fit.ThT <- function(START = list(A = 3000, y0 = 1000, k = 1, t2 = 5)){
-    # ds <- readRDS(file = select.list(title = 'Which annotated data?',
-    #                                  choices = list.files())) %>%
-    #     filter(readingType == select.list(title = 'Which reading do you want to fit?',
-    #                                       choices = unique(readingType)))
-    # df <- fit.boltzmann(ds, A0 = START$A, k0 = START$k, t20 = START$t2)
-    # # df <- filter.fit(df, TOL = 3)
-    # saveRDS(df, 'fitted.RDS')
-    # cat('fitting using Boltzmann model >>\n')
-    # cat('saved as fitted.RDS \n')
-    # ifelse0(select.list(title = 'do you want to plot it now?',
-    #                     choices = c('Yes','No')) == 'Yes',
-    #         ui.plot.fit(),
-    #         print('Thanks for using ThTFit!\n'))
-}
-
-#' UI plot fit
-#'
-#' User interface for ploting fitted ThT kinetic
-#'
-#' @return NULL
-ui.plot.fit <- function(){
-    # warning('ui.plot.fit NotImplemented yet')
-}
 
 #' Fit readings with Boltzmann model
 #'
@@ -101,20 +69,4 @@ Boltzmann <- function(time_, val_, A0 = 1, k0 = 1, t20 = 1) {
     minpack.lm::nlsLM(y ~ A/(1+exp(-k*(t-t2))),
                       data.frame(t = time_, y = val_),
                       start = list( A = A0, k = k0, t2 = t20))
-}
-#' Boltzmann model for fitting time series data
-#'
-#' @param time_ NotExported
-#' @param val_ NotExported
-#' @param start NotExported
-#'
-#' @return NotExported
-Boltzmann_double <- function(time_, val_, start = list(y0 = 500,
-                                                       A = 500, k = 1.1, t2 = 10,
-                                                       A2 = 500, k2 = 1.1, t22 = 10)) {
-    minpack.lm::nlsLM(y ~ y0 +
-                          A/(1+exp(-k*(t-t2))) +
-                          A2/(1+exp(-k2*(t-t22))),
-                      data.frame(t = time_, y = val_),
-                      start = start)
 }
