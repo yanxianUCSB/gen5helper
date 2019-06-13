@@ -1,0 +1,40 @@
+Boltzmann               Boltzmann model for fitting time series data
+Boltzmann_double        Boltzmann model for fitting time series data
+annotate                Add useful variables
+as.is                   as.is
+export2dataframe        Clean Gen5 exported data
+factor2num              this is a file for functions that are
+                        universally useful at common data manipulations
+                        factor2num Convert factor to numeric
+fit.boltzmann           Fit readings with Boltzmann model
+g5h.annotate            g5h.annotate Add time interval
+g5h.annotate.deprecated
+                        Add useful variables
+g5h.clean               Clean Gen5 exported data
+g5h.clean2              Clean Gen5 exported data
+g5h.clean_              Clean Gen5 exported data
+g5h.gather_col          Add mean and standard deviation
+g5h.gather_row          Add mean and standard deviation
+g5h.map_col             Map row or col to new values
+g5h.map_row             Map row or col to new values
+g5h.set_time            Add time intervals
+g5h.set_time2           Add time intervals
+gather_col              Add mean and standard deviation
+gather_row              Add mean and standard deviation
+gen5helper              gen5helper: A Collection of Functions for
+                        Processing Gen5 2.06 Exported Data
+get.halftime            Get half time by linear fitting
+loadpkgs                Attach common packages
+map.group               Map group into new variable
+mapvalues_              mapvalues_
+most.freq               Most frequent numbers get the n most frequent
+                        elements in an array
+normalize               Normalize a vector by min and max
+range_                  Range of a vector
+saveRDS_                saveRDS and return .data
+smooth.mean             Smooth a vector using moving average
+ui.clean                UI for g5h.clean
+ui.fit.ThT              UI fit ThT
+ui.plot.fit             UI plot fit
+ungroup_                Ungroup() and as.data.frame()
+write.csv_              write.csv and return .data
