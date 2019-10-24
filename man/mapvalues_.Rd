@@ -2,7 +2,8 @@
 % Please edit documentation in R/helper.r
 \name{mapvalues_}
 \alias{mapvalues_}
-\title{mapvalues_}
+\title{mapvalues_
+Map the unique values of a vector}
 \usage{
 mapvalues_(x, facs, bNaturalSort = F)
 }
@@ -18,4 +19,8 @@ factor
 }
 \description{
 mapvalues_
+Map the unique values of a vector
+}
+\examples{
+mapvalues_(c("A","A","B","C"), c("one", "two", "three"))
 }

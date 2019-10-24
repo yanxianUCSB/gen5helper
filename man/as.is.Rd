@@ -14,3 +14,6 @@ as.is(x, vec)
 \description{
 as.is
 }
+\examples{
+as.is(c("1", "2", "3"), 1:3)
+}

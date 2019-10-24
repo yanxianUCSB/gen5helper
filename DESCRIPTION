@@ -7,12 +7,11 @@ Authors@R: person("Yanxian", "Lin", email = "yanxian00@gmail.com",
     role = c("aut", "cre"))
 Maintainer: Yanxian Lin <yanxian00@gmail.com>
 Description: A collection of functions for processing 'Gen5' 2.06 exported data.
-    'Gen5' is a popular data analysis software for BioTek plate readers <https://www.biotek.com/products/software-robotics-software/gen5-microplate-reader-and-imager-software/>. This package contains functions for data cleaning, 
+    'Gen5' is an essential data analysis software for BioTek plate readers <https://www.biotek.com/products/software-robotics-software/gen5-microplate-reader-and-imager-software/>. This package contains functions for data cleaning, 
     modeling and plotting using exported data from 'Gen5' version 2.06. It exports
     technically correct data defined in (Edwin de Jonge and Mark van der Loo 
     (2013) <https://cran.r-project.org/doc/contrib/de_Jonge+van_der_Loo-Introduction_to_data_cleaning_with_R.pdf>) for customized analysis. It 
-    contains Boltzmann fitting for general kinetic analysis. It also implement 
-    line plot and bar plot for generating publishable figures. 
+    contains Boltzmann fitting for general kinetic analysis.  
     See <https://www.github.com/yanxianUCSB/gen5helper> for more information,
     documentation and examples.
 Depends: dplyr, utils

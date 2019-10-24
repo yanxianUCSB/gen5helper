@@ -8,7 +8,7 @@
 #' @examples factor2num(factor(c('1', '10', '100')))
 factor2num <- function(x){as.numeric(as.character(x))}
 #' mapvalues_
-#'
+#'Map the unique values of a vector
 #' @param x factor or character
 #' @param facs character. It maps unique(x) to facs
 #' @param bNaturalSort binary
@@ -16,6 +16,7 @@ factor2num <- function(x){as.numeric(as.character(x))}
 #' @importFrom plyr mapvalues
 #' @importFrom naturalsort naturalfactor
 #' @export
+#' @examples mapvalues_(c("A","A","B","C"), c("one", "two", "three"))
 mapvalues_ <- function(x, facs, bNaturalSort = F) {
     #NULLing
     if (bNaturalSort) {
@@ -30,6 +31,8 @@ mapvalues_ <- function(x, facs, bNaturalSort = F) {
 #' @param vec object to extract class
 #'
 #' @export
+#' @examples
+#' as.is(c("1", "2", "3"), 1:3)
 as.is <- function(x, vec) {
     if(class(vec) == 'numeric') {
         return(as.numeric(as.character(x)))
