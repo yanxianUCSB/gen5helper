@@ -23,3 +23,7 @@ a model
 \description{
 Boltzmann model for fitting time series data
 }
+\examples{
+Boltzmann(1:10, c(0,0,1,3,5,7,9,10,10,10), A0 = 10, k0 = 10, t20 = 5)
+
+}

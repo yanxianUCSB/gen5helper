@@ -19,3 +19,12 @@ g5h.clean_() returns technically correct data.frame from Gen5 2.06 exported
 tab-delim data. The exported data can be generated using default export
 protocol in Gen5 2.06. See Gen5 User Guide for more information.
 }
+\examples{
+\dontrun{
+# suppose "exported_data.txt" is the exports from Gen5 2.06
+
+# this line will clean one exported data
+data <- g5h.clean2("exported_data.txt")
+}
+transfrom readLines() output to data.frame
+}

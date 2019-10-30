@@ -2,14 +2,14 @@
 % Please edit documentation in R/annotate.R
 \name{g5h.set_time2}
 \alias{g5h.set_time2}
-\title{Add time intervals}
+\title{Add time intervals to cleaned dataset}
 \usage{
 g5h.set_time2(.data, units = "hours")
 }
 \arguments{
 \item{.data}{data.frame cleaned by g5h.clean()}
 
-\item{units}{hours or minutes}
+\item{units}{"hours" or "minutes"}
 }
 \value{
 input data.frame appended with time
@@ -17,4 +17,10 @@ input data.frame appended with time
 \description{
 g5h.set_time() preserves existing variables and add new variable,
 time, which are time intervals in hours.
+}
+\examples{
+\dontrun{
+g5h.clean2("plate_reader_export.txt") \%>\%
+    g5h.set_time2(units = "hours")
+}
 }

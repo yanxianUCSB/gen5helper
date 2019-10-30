@@ -23,3 +23,8 @@ over depends on the number of points in the curve. A straight line is then fitte
 middle part of the curve, the point at which it crosses the value of 0.5 is recorded as the
 half time. (source: DOI: nprot.2016.010)
 }
+\examples{
+get.halftime(c(1:10), c(0,1,2,3,4,5,6,7,8,9))
+get.halftime(c(1:10), c(0,0,1,3,5,7,9,10,10,10))
+
+}

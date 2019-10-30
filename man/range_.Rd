@@ -2,9 +2,9 @@
 % Please edit documentation in R/helper.r
 \name{range_}
 \alias{range_}
-\title{Range of a vector}
+\title{Return range of a vector}
 \usage{
-range_(x, na.rm = T)
+range_(x, na.rm = TRUE)
 }
 \arguments{
 \item{x}{numeric}
@@ -15,8 +15,9 @@ range_(x, na.rm = T)
 numeric value
 }
 \description{
-This computes the range of a vector as a value; NA removed.
+This computes the range of a vector as a value.
 }
 \examples{
 range_(c(1, 5, 10))
+range_(c(1, 5, 10, NA), na.rm = TRUE)
 }

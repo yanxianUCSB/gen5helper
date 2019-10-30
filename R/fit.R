@@ -7,11 +7,16 @@
 #' over depends on the number of points in the curve. A straight line is then fitted to this
 #' middle part of the curve, the point at which it crosses the value of 0.5 is recorded as the
 #' half time. (source: DOI: nprot.2016.010)
+#'
 #' @param time vector of time
 #' @param val vector of values
 #'
 #' @return half time
 #' @export
+#' @examples
+#' get.halftime(c(1:10), c(0,1,2,3,4,5,6,7,8,9))
+#' get.halftime(c(1:10), c(0,0,1,3,5,7,9,10,10,10))
+#'
 get.halftime <- function(time, val){
     if(!(length(time)==length(val) & length(time)>1)) {
         stop('Length of time and val should be equal and >= 2')
@@ -19,9 +24,8 @@ get.halftime <- function(time, val){
     val <- normalize(val)
     val.smoothed <- smooth.mean(val, ceiling(length(val)/100))
     lm.D9 <- lm(val ~ time, subset=(which(0.3<=val.smoothed & val.smoothed<=0.7)))
-    return( (0.5 - lm.D9$coefficients[1]) / lm.D9$coefficients[2])
+    return(unname((0.5 - lm.D9$coefficients[1]) / lm.D9$coefficients[2]))
 }  # time and normalized var 0.3-0.7
-
 
 #' Fit readings with Boltzmann model
 #'
@@ -38,20 +42,21 @@ get.halftime <- function(time, val){
 #' @importFrom dplyr mutate %>%
 #' @importFrom stats coef predict
 #' @export
+#' @examples
+#' fit.boltzmann(data.frame(x=1:10,y=c(0,0,1,3,5,7,9,10,10,10)), A0 = 10, k0 = 10, t20 = 5)
 #'
 fit.boltzmann <- function(.data, A0 = 1, k0 = 1, t20 = 1) {
         tryCatch({
             mod <- Boltzmann(.data$x, .data$y, A0=A0, k0=k0, t20=t20)
-            ds3 <- .data %>% mutate(
-                A = coef(mod)['A'],
-                k = coef(mod)['k'],
-                t2 = coef(mod)['t2'],
-                r2 = summary(mod)$r.squared,
-                predict = predict(mod))
         }, warning=function(w){
         }, error=function(e){
-            ds3 = NULL
+            return(e)
         }, finally = {})
+    ds3 <- .data %>% mutate(
+        A = coef(mod)['A'],
+        k = coef(mod)['k'],
+        t2 = coef(mod)['t2'],
+        predict = predict(mod))
     return(ds3)
 }
 
@@ -65,6 +70,9 @@ fit.boltzmann <- function(.data, A0 = 1, k0 = 1, t20 = 1) {
 #'
 #' @return a model
 #' @export
+#' @examples
+#' Boltzmann(1:10, c(0,0,1,3,5,7,9,10,10,10), A0 = 10, k0 = 10, t20 = 5)
+#'
 Boltzmann <- function(time_, val_, A0 = 1, k0 = 1, t20 = 1) {
     minpack.lm::nlsLM(y ~ A/(1+exp(-k*(t-t2))),
                       data.frame(t = time_, y = val_),

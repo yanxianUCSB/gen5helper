@@ -14,8 +14,16 @@ saveRDS_(.data, file, ...)
 \item{...}{for saveRDS}
 }
 \value{
-.data
+whatever object passed in.
 }
 \description{
-saveRDS and return .data
+This function returns the object passed in, can be used for dplyr pipeline.
+}
+\examples{
+\dontrun{
+data <- data.frame(a=1, b=2, c=3)
+data \%>\%
+    saveRDS_("data.rds") \%>\%
+    print()
+}
 }

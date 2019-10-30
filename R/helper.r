@@ -1,15 +1,17 @@
 #' this is a file for functions that are universally useful at common data manipulations
 # functions ------------------------------
 
-#' factor2num
-#'Convert factor to numeric
+#' Convert factor to numeric
+#'
 #' @param x factor
 #' @export
 #' @examples
 #' factor2num(factor(c('1', '10', '100')))
+#'
 factor2num <- function(x){as.numeric(as.character(x))}
-#' mapvalues_
-#'Map the unique values of a vector
+
+#' Map the unique values of a vector
+#'
 #' @param x factor or character
 #' @param facs character. It maps unique(x) to facs
 #' @param bNaturalSort binary
@@ -29,7 +31,8 @@ mapvalues_ <- function(x, facs, bNaturalSort = FALSE) {
         factor(plyr::mapvalues(x, unique(x), facs), levels = unique(facs))
     }
 }
-#' as.is
+
+#' cast an object to match class of another object
 #'
 #' @param x object to transform
 #' @param vec object to extract class
@@ -37,6 +40,7 @@ mapvalues_ <- function(x, facs, bNaturalSort = FALSE) {
 #' @export
 #' @examples
 #' as.is(c("1", "2", "3"), 1:3)
+#'
 as.is <- function(x, vec) {
     if(class(vec) == 'numeric') {
         return(as.numeric(as.character(x)))
@@ -46,7 +50,7 @@ as.is <- function(x, vec) {
         return(x)
     }
 }
-# annotation
+
 #' Smooth a vector using moving average
 #'
 #' @param vec numeric vector
@@ -74,9 +78,11 @@ smooth.mean <- function(vec, naverage){
     }
     return(nvec)
 }
-#' Range of a vector
+
+#' Return range of a vector
 #'
-#' This computes the range of a vector as a value; NA removed.
+#' This computes the range of a vector as a value.
+#'
 #' @param x numeric
 #' @param na.rm bool whether to remove NA values.
 #'
@@ -88,24 +94,26 @@ smooth.mean <- function(vec, naverage){
 range_ <- function(x, na.rm=TRUE){
     max(x, na.rm = na.rm)-min(x, na.rm = na.rm)
 }
-#' Normalize a vector by min and max
+
+#' Scale a vector to 0-1 by min and max
 #'
-#' NA removed
 #' @param x numeric
 #'
 #' @return a normalized vector
 #' @export
 #' @examples
+#'
 #' normalize(0:10)
 #' normalize(c(1, 100, NA, 10), na.rm = TRUE)
 normalize <- function(x, na.rm = TRUE){
     (x-min(x, na.rm = na.rm))/range_(x, na.rm = na.rm)
 }
-#' Ungroup() and as.data.frame()
+
+#' Run ungroup() and as.data.frame()
 #'
 #' @param .data grouped data.frame
 #'
-#' @return data.frame()
+#' @return an ungrouped data.frame()
 #' @importFrom dplyr ungroup
 #' @export
 #' @examples
@@ -118,12 +126,15 @@ normalize <- function(x, na.rm = TRUE){
 ungroup_ <- function(.data){
     return(as.data.frame(ungroup(.data)))
 }
-#' write.csv without row.names and return .data
+
+#' write.csv without row.names
+#'
+#' This function returns the object passed in, can be used for dplyr pipeline.
 #'
 #' @param x object
 #' @param file filename for write.csv
 #'
-#' @return x
+#' @return whatever object passed in
 #' @importFrom utils write.csv
 #' @export
 #' @examples
@@ -139,13 +150,16 @@ write.csv_ <- function(x, file){
     write.csv(x, file, row.names = FALSE)
     return(x)
 }
+
 #' saveRDS and return .data
+#'
+#' This function returns the object passed in, can be used for dplyr pipeline.
 #'
 #' @param .data object to be saved
 #' @param file filename to save
 #' @param ... for saveRDS
 #'
-#' @return .data
+#' @return whatever object passed in.
 #' @export
 #' @examples
 #' \dontrun{
@@ -158,8 +172,11 @@ saveRDS_ <- function(.data, file, ...){
     saveRDS(object = .data, file = file, ...)
     return(.data)
 }
-#' Most frequent numbers
-#'get the n most frequent elements in an array
+
+#' Return most frequent numbers
+#'
+#' get the n most frequent elements in an array
+#'
 #' @param x an array of elements
 #' @param n integer, default is 1
 #'

@@ -3,7 +3,6 @@
 \name{factor2num}
 \alias{factor2num}
 \title{this is a file for functions that are universally useful at common data manipulations
-factor2num
 Convert factor to numeric}
 \usage{
 factor2num(x)
@@ -13,9 +12,9 @@ factor2num(x)
 }
 \description{
 this is a file for functions that are universally useful at common data manipulations
-factor2num
 Convert factor to numeric
 }
 \examples{
 factor2num(factor(c('1', '10', '100')))
+
 }

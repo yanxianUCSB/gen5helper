@@ -23,3 +23,7 @@ fit.boltzmann() using Boltzmann model to fit readings and time intervals with
 unit of hours, using start as initial guesses. It appends A, y0, k, t2 and val.predict, while preserving existing
 variables.
 }
+\examples{
+fit.boltzmann(data.frame(x=1:10,y=c(0,0,1,3,5,7,9,10,10,10)), A0 = 10, k0 = 10, t20 = 5)
+
+}

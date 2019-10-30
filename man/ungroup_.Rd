@@ -2,7 +2,7 @@
 % Please edit documentation in R/helper.r
 \name{ungroup_}
 \alias{ungroup_}
-\title{Ungroup() and as.data.frame()}
+\title{Run ungroup() and as.data.frame()}
 \usage{
 ungroup_(.data)
 }
@@ -10,8 +10,16 @@ ungroup_(.data)
 \item{.data}{grouped data.frame}
 }
 \value{
-data.frame()
+an ungrouped data.frame()
 }
 \description{
-Ungroup() and as.data.frame()
+Run ungroup() and as.data.frame()
+}
+\examples{
+\dontrun{
+data <- data.frame(m=c(1,2), n=c(2,3), group=c('a','b'))
+data \%>\%
+    group_by(group) \%>\%
+    ungroup_()
+}
 }

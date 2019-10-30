@@ -2,8 +2,7 @@
 % Please edit documentation in R/helper.r
 \name{most.freq}
 \alias{most.freq}
-\title{Most frequent numbers
-get the n most frequent elements in an array}
+\title{Return most frequent numbers}
 \usage{
 most.freq(x, n = 1)
 }
@@ -16,7 +15,6 @@ most.freq(x, n = 1)
 the most n elements
 }
 \description{
-Most frequent numbers
 get the n most frequent elements in an array
 }
 \examples{

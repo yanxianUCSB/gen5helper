@@ -2,8 +2,7 @@
 % Please edit documentation in R/annotate.R
 \name{g5h.annotate}
 \alias{g5h.annotate}
-\title{g5h.annotate
-Add time interval}
+\title{Annotate a cleaned dataset}
 \usage{
 g5h.annotate(.data, by = "col")
 }
@@ -16,6 +15,11 @@ g5h.annotate(.data, by = "col")
 data.frame
 }
 \description{
-g5h.annotate
-Add time interval
+Add time interval in hour from the oldest timestamp
+}
+\examples{
+\dontrun{
+g5h.clean2("plate_reader_export.txt") \%>\%
+    g5h.annotate()
+}
 }

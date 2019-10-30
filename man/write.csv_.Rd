@@ -2,7 +2,7 @@
 % Please edit documentation in R/helper.r
 \name{write.csv_}
 \alias{write.csv_}
-\title{write.csv and return .data}
+\title{write.csv without row.names}
 \usage{
 write.csv_(x, file)
 }
@@ -12,8 +12,18 @@ write.csv_(x, file)
 \item{file}{filename for write.csv}
 }
 \value{
-x
+whatever object passed in
 }
 \description{
-write.csv and return .data
+This function returns the object passed in, can be used for dplyr pipeline.
+}
+\examples{
+\dontrun{
+write.csv_(data.frame(a=1, b=2, c=3), "data.csv")
+
+data <- data.frame(a=1, b=2, c=3)
+data \%>\%
+    write.csv_("data.csv") \%>\%
+    print()
+}
 }

@@ -2,9 +2,9 @@
 % Please edit documentation in R/helper.r
 \name{normalize}
 \alias{normalize}
-\title{Normalize a vector by min and max}
+\title{Scale a vector to 0-1 by min and max}
 \usage{
-normalize(x)
+normalize(x, na.rm = TRUE)
 }
 \arguments{
 \item{x}{numeric}
@@ -13,8 +13,10 @@ normalize(x)
 a normalized vector
 }
 \description{
-NA removed
+Scale a vector to 0-1 by min and max
 }
 \examples{
+
 normalize(0:10)
+normalize(c(1, 100, NA, 10), na.rm = TRUE)
 }
