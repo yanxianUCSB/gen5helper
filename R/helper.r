@@ -5,7 +5,8 @@
 #'Convert factor to numeric
 #' @param x factor
 #' @export
-#' @examples factor2num(factor(c('1', '10', '100')))
+#' @examples
+#' factor2num(factor(c('1', '10', '100')))
 factor2num <- function(x){as.numeric(as.character(x))}
 #' mapvalues_
 #'Map the unique values of a vector
@@ -16,8 +17,11 @@ factor2num <- function(x){as.numeric(as.character(x))}
 #' @importFrom plyr mapvalues
 #' @importFrom naturalsort naturalfactor
 #' @export
-#' @examples mapvalues_(c("A","A","B","C"), c("one", "two", "three"))
-mapvalues_ <- function(x, facs, bNaturalSort = F) {
+#' @examples
+#' mapvalues_(c("A","A","B","C"), c("one", "two", "three"))
+#' mapvalues_(c("apple", "apple", "banana", "pineable", "pineable"), c(3, 2, 1), bNaturalSort = TRUE)
+#'
+mapvalues_ <- function(x, facs, bNaturalSort = FALSE) {
     #NULLing
     if (bNaturalSort) {
         naturalsort::naturalfactor(plyr::mapvalues(x, unique(x), facs))
@@ -80,7 +84,8 @@ smooth.mean <- function(vec, naverage){
 #' @export
 #' @examples
 #' range_(c(1, 5, 10))
-range_ <- function(x, na.rm=T){
+#' range_(c(1, 5, 10, NA), na.rm = TRUE)
+range_ <- function(x, na.rm=TRUE){
     max(x, na.rm = na.rm)-min(x, na.rm = na.rm)
 }
 #' Normalize a vector by min and max
@@ -92,8 +97,9 @@ range_ <- function(x, na.rm=T){
 #' @export
 #' @examples
 #' normalize(0:10)
-normalize <- function(x){
-    (x-min(x, na.rm = T))/range_(x)
+#' normalize(c(1, 100, NA, 10), na.rm = TRUE)
+normalize <- function(x, na.rm = TRUE){
+    (x-min(x, na.rm = na.rm))/range_(x, na.rm = na.rm)
 }
 #' Ungroup() and as.data.frame()
 #'
@@ -102,10 +108,17 @@ normalize <- function(x){
 #' @return data.frame()
 #' @importFrom dplyr ungroup
 #' @export
+#' @examples
+#' \dontrun{
+#' data <- data.frame(m=c(1,2), n=c(2,3), group=c('a','b'))
+#' data %>%
+#'     group_by(group) %>%
+#'     ungroup_()
+#' }
 ungroup_ <- function(.data){
     return(as.data.frame(ungroup(.data)))
 }
-#' write.csv and return .data
+#' write.csv without row.names and return .data
 #'
 #' @param x object
 #' @param file filename for write.csv
@@ -113,8 +126,17 @@ ungroup_ <- function(.data){
 #' @return x
 #' @importFrom utils write.csv
 #' @export
+#' @examples
+#' \dontrun{
+#' write.csv_(data.frame(a=1, b=2, c=3), "data.csv")
+#'
+#' data <- data.frame(a=1, b=2, c=3)
+#' data %>%
+#'     write.csv_("data.csv") %>%
+#'     print()
+#' }
 write.csv_ <- function(x, file){
-    write.csv(x, file, row.names = F)
+    write.csv(x, file, row.names = FALSE)
     return(x)
 }
 #' saveRDS and return .data
@@ -125,6 +147,13 @@ write.csv_ <- function(x, file){
 #'
 #' @return .data
 #' @export
+#' @examples
+#' \dontrun{
+#' data <- data.frame(a=1, b=2, c=3)
+#' data %>%
+#'     saveRDS_("data.rds") %>%
+#'     print()
+#' }
 saveRDS_ <- function(.data, file, ...){
     saveRDS(object = .data, file = file, ...)
     return(.data)
