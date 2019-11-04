@@ -1,5 +1,3 @@
-# annotating ------------------------------
-
 #' Annotate a cleaned dataset
 #'
 #' Add time interval in hour from the oldest timestamp

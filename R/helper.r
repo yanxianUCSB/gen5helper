@@ -1,9 +1,9 @@
 #' this is a file for functions that are universally useful at common data manipulations
-# functions ------------------------------
 
 #' Convert factor to numeric
 #'
 #' @param x factor
+#'
 #' @export
 #' @examples
 #' factor2num(factor(c('1', '10', '100')))
@@ -14,7 +14,8 @@ factor2num <- function(x){as.numeric(as.character(x))}
 #'
 #' @param x factor or character
 #' @param facs character. It maps unique(x) to facs
-#' @param bNaturalSort binary
+#' @param bNaturalSort binary. Whether to convert factor in natural order.
+#'
 #' @return factor
 #' @importFrom plyr mapvalues
 #' @importFrom naturalsort naturalfactor
@@ -32,7 +33,7 @@ mapvalues_ <- function(x, facs, bNaturalSort = FALSE) {
     }
 }
 
-#' cast an object to match class of another object
+#' Cast an object to match class of another object
 #'
 #' @param x object to transform
 #' @param vec object to extract class
@@ -58,7 +59,6 @@ as.is <- function(x, vec) {
 #'
 #' @return smoothed
 #' @export
-#'
 #' @examples
 #' smooth.mean(1:10, 2)
 #' smooth.mean(1:10, 3)
@@ -103,7 +103,6 @@ range_ <- function(x, na.rm=TRUE){
 #' @return a normalized vector
 #' @export
 #' @examples
-#'
 #' normalize(0:10)
 #' normalize(c(1, 100, NA, 10), na.rm = TRUE)
 normalize <- function(x, na.rm = TRUE){
@@ -166,9 +165,10 @@ write.csv_ <- function(x, file){
 #' \donttest{
 #' data <- data.frame(a=1, b=2, c=3)
 #' data %>%
-#'     saveRDS_("data.rds") %>%
+#'     saveRDS_(file.path(tempdir(), "data.rds")) %>%
 #'     print()
 #' }
+#'
 saveRDS_ <- function(.data, file, ...){
     saveRDS(object = .data, file = file, ...)
     return(.data)
@@ -183,10 +183,10 @@ saveRDS_ <- function(.data, file, ...){
 #'
 #' @return the most n elements
 #' @export
-#'
 #' @examples
 #' most.freq(c('a', 'a', 'b', 'b', 'b', 'c'), n = 2)
 #' most.freq(c(1, 1, 2, 3, 3, 3, 4, 4), n = 2)
+#'
 most.freq <- function(x, n = 1){
     if(length(x) == 1) return(x)
     type <- typeof(x)

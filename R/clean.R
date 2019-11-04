@@ -21,6 +21,7 @@
 #' # this line will clean two exported data and return one appended dataset
 #' data <- g5h.clean2(c("exported_data_1.txt", "exported_data_2.txt"))
 #' }
+#'
 g5h.clean2 <- function(files) {
     bind_rows(lapply(files, function(file) g5h.clean_(file)))
 }
@@ -39,13 +40,6 @@ g5h.clean2 <- function(files) {
 #' @import dplyr
 #' @importFrom utils read.csv
 #' @importFrom stats sd lm
-#' @examples
-#' \donttest{
-#' # suppose "exported_data.txt" is the exports from Gen5 2.06
-#'
-#' # this line will clean one exported data
-#' data <- g5h.clean2("exported_data.txt")
-#' }
 g5h.clean_ <- function(file) {
     #NULLing to appease R CMD CHECK
     val <- well <- Time <- time_hour <- time_min <- time_sec <- total_min <-
