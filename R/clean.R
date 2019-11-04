@@ -61,7 +61,7 @@ g5h.clean_ <- function(file) {
         }, simplify = T)
     }
     read2ds <- function(file, start.row, end.row) {
-        #' transfrom readLines() output to data.frame
+        # transfrom readLines output to data.frame
         ds <- read.csv(file, header = T, nrows = end.row - start.row,
                        skip = start.row - 1, sep = '\t', stringsAsFactors = F)
         ds2 <- tidyr::gather(ds, 'well', 'val', 3:ncol(ds)) %>%

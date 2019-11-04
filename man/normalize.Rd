@@ -8,6 +8,8 @@ normalize(x, na.rm = TRUE)
 }
 \arguments{
 \item{x}{numeric}
+
+\item{na.rm}{bool whether to remove NA values.}
 }
 \value{
 a normalized vector

@@ -26,5 +26,4 @@ protocol in Gen5 2.06. See Gen5 User Guide for more information.
 # this line will clean one exported data
 data <- g5h.clean2("exported_data.txt")
 }
-transfrom readLines() output to data.frame
 }

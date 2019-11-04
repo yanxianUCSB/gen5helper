@@ -98,6 +98,7 @@ range_ <- function(x, na.rm=TRUE){
 #' Scale a vector to 0-1 by min and max
 #'
 #' @param x numeric
+#' @param na.rm bool whether to remove NA values.
 #'
 #' @return a normalized vector
 #' @export
