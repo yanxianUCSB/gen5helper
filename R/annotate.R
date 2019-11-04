@@ -10,7 +10,7 @@
 #' @return data.frame
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' g5h.clean2("plate_reader_export.txt") %>%
 #'     g5h.annotate()
 #' }
@@ -29,7 +29,7 @@ g5h.annotate <- function(.data, by='col'){
 #'
 #' @return input data.frame appended with time
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' g5h.clean2("plate_reader_export.txt") %>%
 #'     g5h.set_time2(units = "hours")
 #' }

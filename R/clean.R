@@ -12,7 +12,7 @@
 #' @importFrom dplyr bind_rows
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # suppose "exported_data_1.txt" and "exported_data_2.txt" are the exports from Gen5 2.06
 #'
 #' # this line will clean one exported data
@@ -40,7 +40,7 @@ g5h.clean2 <- function(files) {
 #' @importFrom utils read.csv
 #' @importFrom stats sd lm
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # suppose "exported_data.txt" is the exports from Gen5 2.06
 #'
 #' # this line will clean one exported data

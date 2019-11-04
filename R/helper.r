@@ -118,7 +118,7 @@ normalize <- function(x, na.rm = TRUE){
 #' @importFrom dplyr ungroup
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' data <- data.frame(m=c(1,2), n=c(2,3), group=c('a','b'))
 #' data %>%
 #'     group_by(group) %>%
@@ -139,7 +139,7 @@ ungroup_ <- function(.data){
 #' @importFrom utils write.csv
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' write.csv_(data.frame(a=1, b=2, c=3), "data.csv")
 #'
 #' data <- data.frame(a=1, b=2, c=3)
@@ -163,7 +163,7 @@ write.csv_ <- function(x, file){
 #' @return whatever object passed in.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' data <- data.frame(a=1, b=2, c=3)
 #' data %>%
 #'     saveRDS_("data.rds") %>%
