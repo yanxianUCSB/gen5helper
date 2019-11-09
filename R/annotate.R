@@ -9,7 +9,9 @@
 #' @export
 #' @examples
 #' \donttest{
-#' g5h.clean2("plate_reader_export.txt") %>%
+#' # suppose "gen5_export.txt" is the export from Gen5 2.06
+#'
+#' g5h.clean2("gen5_export.txt") %>%
 #'     g5h.annotate()
 #' }
 g5h.annotate <- function(.data, by='col'){
@@ -26,11 +28,6 @@ g5h.annotate <- function(.data, by='col'){
 #' @param units "hours" or "minutes"
 #'
 #' @return input data.frame appended with time
-#' @examples
-#' \donttest{
-#' g5h.clean2("plate_reader_export.txt") %>%
-#'     g5h.set_time2(units = "hours")
-#' }
 g5h.set_time2 <- function(.data, units='hours') {
     #NULLing
     realTime <- time <- NULL

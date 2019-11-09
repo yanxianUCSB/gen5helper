@@ -20,10 +20,11 @@ whatever object passed in.
 This function returns the object passed in, can be used for dplyr pipeline.
 }
 \examples{
-\dontrun{
+\donttest{
 data <- data.frame(a=1, b=2, c=3)
 data \%>\%
-    saveRDS_("data.rds") \%>\%
+    saveRDS_(file.path(tempdir(), "data.rds")) \%>\%
     print()
 }
+
 }

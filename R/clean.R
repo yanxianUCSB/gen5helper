@@ -45,10 +45,6 @@ g5h.clean_ <- function(file) {
     val <- well <- Time <- time_hour <- time_min <- time_sec <- total_min <-
         time.start <- time.min <- realTime <- readingType <- temp <-
         time <- realHour <- group <- NULL
-
-    if(file == 'data/demo.txt'){
-        return(readRDS('data/demo.rds'))
-    }
     strsplit_ <- function(strVec, split, n = 1){
         sapply(strVec, function(x){
             strsplit(x, split)[[1]][n]

@@ -2,7 +2,7 @@
 % Please edit documentation in R/helper.r
 \name{as.is}
 \alias{as.is}
-\title{cast an object to match class of another object}
+\title{Cast an object to match class of another object}
 \usage{
 as.is(x, vec)
 }
@@ -12,7 +12,7 @@ as.is(x, vec)
 \item{vec}{object to extract class}
 }
 \description{
-cast an object to match class of another object
+Cast an object to match class of another object
 }
 \examples{
 as.is(c("1", "2", "3"), 1:3)

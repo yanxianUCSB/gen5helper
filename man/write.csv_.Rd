@@ -18,7 +18,7 @@ whatever object passed in
 This function returns the object passed in, can be used for dplyr pipeline.
 }
 \examples{
-\dontrun{
+\donttest{
 write.csv_(data.frame(a=1, b=2, c=3), "data.csv")
 
 data <- data.frame(a=1, b=2, c=3)

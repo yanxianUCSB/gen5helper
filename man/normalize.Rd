@@ -18,7 +18,6 @@ a normalized vector
 Scale a vector to 0-1 by min and max
 }
 \examples{
-
 normalize(0:10)
 normalize(c(1, 100, NA, 10), na.rm = TRUE)
 }

@@ -16,7 +16,7 @@ an ungrouped data.frame()
 Run ungroup() and as.data.frame()
 }
 \examples{
-\dontrun{
+\donttest{
 data <- data.frame(m=c(1,2), n=c(2,3), group=c('a','b'))
 data \%>\%
     group_by(group) \%>\%

@@ -11,7 +11,7 @@ mapvalues_(x, facs, bNaturalSort = FALSE)
 
 \item{facs}{character. It maps unique(x) to facs}
 
-\item{bNaturalSort}{binary}
+\item{bNaturalSort}{binary. Whether to convert factor in natural order.}
 }
 \value{
 factor

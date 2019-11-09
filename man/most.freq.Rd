@@ -20,4 +20,5 @@ get the n most frequent elements in an array
 \examples{
 most.freq(c('a', 'a', 'b', 'b', 'b', 'c'), n = 2)
 most.freq(c(1, 1, 2, 3, 3, 3, 4, 4), n = 2)
+
 }

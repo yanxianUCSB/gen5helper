@@ -18,8 +18,10 @@ data.frame
 Add time interval in hour from the oldest timestamp
 }
 \examples{
-\dontrun{
-g5h.clean2("plate_reader_export.txt") \%>\%
+\donttest{
+# suppose "gen5_export.txt" is the export from Gen5 2.06
+
+g5h.clean2("gen5_export.txt") \%>\%
     g5h.annotate()
 }
 }

@@ -18,9 +18,3 @@ input data.frame appended with time
 g5h.set_time() preserves existing variables and add new variable,
 time, which are time intervals in hours.
 }
-\examples{
-\dontrun{
-g5h.clean2("plate_reader_export.txt") \%>\%
-    g5h.set_time2(units = "hours")
-}
-}
