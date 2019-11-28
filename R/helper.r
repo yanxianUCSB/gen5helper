@@ -1,6 +1,21 @@
 #' this is a file for functions that are universally useful at common data manipulations
 
-#' Create or transform variables conditionally
+#' Is a Value Spike?
+#'
+#' @param x numeric vector
+#' @param tol tolerance
+#'
+#' @return boolean vector
+#' @export
+#'
+#' @examples
+#' is_spike(c(1, 2, 1, 1000, -100, 2, 1))
+is_spike <- function(x, tol = 1) {
+    absdiff <- abs(diff(c(0, x)))
+    return(c(FALSE, absdiff > mean(absdiff) + tol * sd(absdiff)))
+}
+
+#' Replace Values in Multiple Variables Conditionally
 #'
 #' @param .data A tbl.
 #' @param condition condition.
@@ -10,9 +25,10 @@
 #' @export
 #'
 #' @examples
-#' mtcars %>% mutate_cond(gear == 4, hp = 1000)
+#' mtcars %>%
+#'     ReplaceCond(gear == 4, hp = 1000, cyl = NA)
 #'
-mutate_cond <- function(.data, condition, ..., envir = parent.frame()) {
+ReplaceCond <- function(.data, condition, ..., envir = parent.frame()) {
     condition <- eval(substitute(condition), .data, envir)
     .data[condition, ] <- .data[condition, ] %>% mutate(...)
     return(.data)
