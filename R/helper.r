@@ -1,5 +1,51 @@
 #' this is a file for functions that are universally useful at common data manipulations
 
+#' Create or transform variables conditionally
+#'
+#' @param .data A tbl.
+#' @param condition condition.
+#' @param ... Name-value pairs of expressions.
+#' @param envir Environment.
+#'
+#' @export
+#'
+#' @examples
+#' mtcars %>% mutate_cond(gear == 4, hp = 1000)
+#'
+mutate_cond <- function(.data, condition, ..., envir = parent.frame()) {
+    condition <- eval(substitute(condition), .data, envir)
+    .data[condition, ] <- .data[condition, ] %>% mutate(...)
+    return(.data)
+}
+
+#' Generate a sequence of upper-case Roman alphabet
+#'
+#' @param from first letter
+#' @param to last letter
+#'
+#' @export
+#' @examples
+#' seq_LETTERS('B', 'E')
+#'
+seq_LETTERS <- function(from, to){
+    LETTERS[which(LETTERS == from):which(LETTERS == to)]
+}
+
+#' Generate a sequence of lower-case Roman alphabet
+#'
+#' @param from first letter
+#' @param to last letter
+#'
+#' @return an array of letters
+#' @export
+#'
+#' @examples
+#' seq_letters('b', 'e')
+#'
+seq_letters <- function(from, to){
+    letters[which(letters == from):which(letters == to)]
+}
+
 #' Convert factor to numeric
 #'
 #' @param x factor

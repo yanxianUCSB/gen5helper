@@ -2,8 +2,7 @@
 % Please edit documentation in R/helper.r
 \name{factor2num}
 \alias{factor2num}
-\title{this is a file for functions that are universally useful at common data manipulations
-Convert factor to numeric}
+\title{Convert factor to numeric}
 \usage{
 factor2num(x)
 }
@@ -11,7 +10,6 @@ factor2num(x)
 \item{x}{factor}
 }
 \description{
-this is a file for functions that are universally useful at common data manipulations
 Convert factor to numeric
 }
 \examples{
