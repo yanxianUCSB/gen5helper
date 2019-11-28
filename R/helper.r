@@ -139,11 +139,11 @@ ungroup_ <- function(.data){
 #' @export
 #' @examples
 #' \donttest{
-#' write.csv_(data.frame(a=1, b=2, c=3), "data.csv")
+#' write.csv_(data.frame(a=1, b=2, c=3), file.path(tempdir(), "data.csv"))
 #'
 #' data <- data.frame(a=1, b=2, c=3)
 #' data %>%
-#'     write.csv_("data.csv") %>%
+#'     file.path(tempdir(), "data.csv") %>%
 #'     print()
 #' }
 write.csv_ <- function(x, file){
