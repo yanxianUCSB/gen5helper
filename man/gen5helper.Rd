@@ -3,7 +3,6 @@
 \docType{package}
 \name{gen5helper}
 \alias{gen5helper}
-\alias{gen5helper-package}
 \title{gen5helper: A Collection of Functions for Processing Gen5 2.06 Exported Data}
 \description{
 A collection of functions for processing Gen5 2.06 exported data.
