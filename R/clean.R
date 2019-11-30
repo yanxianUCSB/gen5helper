@@ -23,7 +23,8 @@
 #' }
 #'
 g5h.clean2 <- function(files) {
-    bind_rows(lapply(files, function(file) g5h.clean_(file)))
+    .data <- bind_rows(lapply(files, function(file) g5h.clean_(file)))
+    class(.data) <- c(class(.data), 'g5h.cleaned')
 }
 
 #' Clean Gen5 exported data
