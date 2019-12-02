@@ -2,8 +2,7 @@
 % Please edit documentation in R/helper.r
 \name{is_spike}
 \alias{is_spike}
-\title{this is a file for functions that are universally useful at common data manipulations
-Is a Value Spike?}
+\title{Is a Value Spike?}
 \usage{
 is_spike(x, tol = 1)
 }
@@ -16,7 +15,6 @@ is_spike(x, tol = 1)
 boolean vector
 }
 \description{
-this is a file for functions that are universally useful at common data manipulations
 Is a Value Spike?
 }
 \examples{
