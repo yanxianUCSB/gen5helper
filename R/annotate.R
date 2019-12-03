@@ -16,8 +16,9 @@
 #' }
 g5h.annotate <- function(.data, by='col'){
     .data %>%
-        g5h.set_time2('hours')
-    class(.data) <- c(class(.data), 'g5h.annotated')
+        g5h.set_time2('hours') %>%
+        AppendClass('g5h.annotated') %>%
+        return()
 }
 
 #' Add time intervals to cleaned dataset
