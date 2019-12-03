@@ -298,9 +298,9 @@ most.freq <- function(x, n = 1){
 #'
 #' g5h.clean2("gen5_export.txt") %>%
 #'     g5h.annotate() %>%
-#'     select.wells(c('A', 'C'), 2:4)
+#'     SelectWells(c('A', 'C'), 2:4)
 #' }
-select.wells <- function(.data, rows, cols) {
+SelectWells <- function(.data, rows, cols) {
     subset(.data, row %in% rows, col %in% cols)
 }
 
