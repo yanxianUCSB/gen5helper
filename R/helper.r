@@ -364,5 +364,7 @@ most.freq <- function(x, n = 1){
 #'     SelectWells(c('A', 'C'), 2:4)
 #' }
 SelectWells <- function(.data, rows, cols) {
-    subset(.data, row %in% rows, col %in% cols)
+    .data <- subset(.data, row %in% rows)
+    .data <- subset(.data, col %in% cols)
+    return(.data)
 }
