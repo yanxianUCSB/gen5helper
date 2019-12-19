@@ -2,8 +2,7 @@
 % Please edit documentation in R/helper.r
 \name{scale_quantile}
 \alias{scale_quantile}
-\title{this is a file for functions that are universally useful at common data manipulations
-Use Sample Quantiles to Scale a Numeric Vector}
+\title{Use Sample Quantiles to Scale a Numeric Vector}
 \usage{
 scale_quantile(x, qmin, qmax)
 }
@@ -15,7 +14,6 @@ scale_quantile(x, qmin, qmax)
 \item{qmax}{x which above qmax will be averaged and scaled to 1}
 }
 \description{
-this is a file for functions that are universally useful at common data manipulations
 Use Sample Quantiles to Scale a Numeric Vector
 }
 \examples{

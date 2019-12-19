@@ -1,4 +1,4 @@
-
+# Helper ============
 
 #' fill empty string in an array using the non-empty occurance.
 #'
@@ -62,6 +62,25 @@ scale_quantile <- function(x, qmin, qmax){
     return(
         (x-xmin)/(xmax-xmin)
     )
+}
+#' Append new class
+#'
+#' @param obj object
+#' @param labels array of class names to append
+#'
+#' @return object with new class atrribute
+#' @export
+#'
+#' @examples
+#' x <- c('A', 'B')
+#' AppendClass(x, 'LETTER')
+AppendClass <- function(obj, labels) {
+    for (label in labels) {
+        if (!label %in% class(obj)) {
+            class(obj) <- c(class(obj), label)
+        }
+    }
+    return(obj)
 }
 
 #' Is a Value Spike?
@@ -324,4 +343,26 @@ most.freq <- function(x, n = 1){
     results <- names(sort.freq[1:this.index])
     class(results) <- typeof(x)
     return(results)
+}
+
+# cleaning ============
+#' Select Wells
+#'
+#' @param .data tbl g5h.cleaned
+#' @param rows character array of rows
+#' @param cols array of cols
+#'
+#' @return tbl subsetted
+#' @export
+#'
+#' @examples
+#' \donttest{
+#' # suppose "gen5_export.txt" is the export from Gen5 2.06
+#'
+#' g5h.clean2("gen5_export.txt") %>%
+#'     g5h.annotate() %>%
+#'     SelectWells(c('A', 'C'), 2:4)
+#' }
+SelectWells <- function(.data, rows, cols) {
+    subset(.data, row %in% rows, col %in% cols)
 }
