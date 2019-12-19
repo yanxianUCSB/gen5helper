@@ -1,4 +1,68 @@
-#' this is a file for functions that are universally useful at common data manipulations
+
+
+#' fill empty string in an array using the non-empty occurance.
+#'
+#' @param vec character array
+#'
+#' @export
+#'
+#' @examples
+#' fill_str_array(c("A", "", "B", "", "", "C"))
+#' fill_str_array(c("A", "", "B", NA, "", "C"))
+#' fill_str_array(c("", "B", "", "", "C"))
+#'
+fill_str_array <- function(vec) {
+    new.vec <- c()
+    prev.s <- ""
+    for(i in 1:length(vec)) {
+        if (is.na(vec[i]) || vec[i] == "") {
+            new.vec[i] <- prev.s
+        } else {
+            new.vec[i] <- vec[i]
+            prev.s <- vec[i]
+        }
+    }
+    return(new.vec)
+}
+
+#' Scale a Numeric Vector Using the Head and Tail
+#'
+#' @param x a numeric vector
+#' @param nhead the first nhead of x will be averaged and scaled to 0
+#' @param ntail the last ntail of x will be averaged and scaled to 1
+#'
+#' @export
+#'
+#' @examples
+#' scale_head_tail(1:10, nhead = 2, ntail = 2)
+#'
+scale_head_tail <- function(x, nhead, ntail){
+    head_mean <- mean(x[1:nhead], na.rm = TRUE)
+    tail_mean <- mean(x[-(1:(length(x)-ntail))], na.rm = TRUE)
+    return((x-head_mean)/(tail_mean-head_mean))
+}
+
+#' Use Sample Quantiles to Scale a Numeric Vector
+#'
+#' @param x a numeric vector
+#' @param qmin x which below qmin will be averaged and scaled to 0
+#' @param qmax x which above qmax will be averaged and scaled to 1
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' scale_quantile(c(1:10), 0.25, 0.75)
+#' scale_quantile(c(1:10, NA, 10:1), 0.25, 0.75)
+#'
+scale_quantile <- function(x, qmin, qmax){
+    na.rm <- TRUE
+    xmin <- mean(x[x < quantile(x, qmin, na.rm = na.rm)], na.rm = na.rm)
+    xmax <- mean(x[x > quantile(x, qmax, na.rm = na.rm)], na.rm = na.rm)
+    return(
+        (x-xmin)/(xmax-xmin)
+    )
+}
 
 #' Is a Value Spike?
 #'
