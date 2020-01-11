@@ -8,11 +8,10 @@ A Collection of Functions for Processing Gen5 2.06 Exported Data
 Installation
 ------------
 
-You can install gen5helper from github with:
+You can install gen5helper from CRAN with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("yanxianucsb/gen5helper")
+install.packages("gen5helper")
 ```
 
 Example
@@ -22,9 +21,7 @@ After exporting tab-delim ascii files (named 'data.txt' for instance), this is a
 
 ``` r
 ## clean
-df <- g5h.clean('data.txt')
-## add time intervals
-df <- g5h.set_time(df)
-## add mean, standard deviation, treatment and dose.
+df <- g5h.clean2('data.txt')
+## add time interval.
 df <- g5h.annotate(df)
 ```
