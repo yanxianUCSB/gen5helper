@@ -5,6 +5,8 @@ gen5helper
 
 A Collection of Functions for Processing Gen5 2.06 Exported Data
 
+Packege info and documentation: https://cran.r-project.org/web/packages/gen5helper/index.html
+
 Installation
 ------------
 
