@@ -81,12 +81,12 @@ smooth.mean <- function(vec, naverage){
 
 #' Return range of a vector
 #'
-#' This computes the range of a vector as a value.
+#' This computes the range of a vector as a scalar.
 #'
 #' @param x numeric
-#' @param na.rm bool whether to remove NA values.
+#' @param na.rm bool. Whether to remove NA values.
 #'
-#' @return numeric value
+#' @return numeric scalar
 #' @export
 #' @examples
 #' range_(c(1, 5, 10))
@@ -98,7 +98,7 @@ range_ <- function(x, na.rm=TRUE){
 #' Scale a vector to 0-1 by min and max
 #'
 #' @param x numeric
-#' @param na.rm bool whether to remove NA values.
+#' @param na.rm bool. whether to remove NA values.
 #'
 #' @return a normalized vector
 #' @export
